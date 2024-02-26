@@ -2,15 +2,21 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Chapter;
+use App\Models\MemberType;
+use Laravel\Sanctum\HasApiTokens;
+use Filament\Models\Contracts\HasName;
+use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Notifications\Notifiable;
+use Filament\Models\Contracts\FilamentUser;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
+
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -18,7 +24,14 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'firstname',
+        'middlename',
+        'lastname',
+        'dob',
+        'phone',
+        'gender',
+        'member_type_id',
+        'chapter_id',
         'email',
         'password',
     ];
@@ -40,6 +53,46 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
     ];
+
+    public function getNameAttribute()
+    {
+        return $this->firstname.' '.$this->middlename. ' '.$this->lastname;
+    }
+
+    // public function hasRole($role)
+    // {
+    //     return $this->role === $role;
+    // }
+
+    public function chapter()
+    {
+        return $this->belongsTo(Chapter::class);
+    }
+   
+    public function member_type()
+    {
+        return $this->belongsTo(MemberType::class);
+    }
+
+    public function missions()
+    {
+    return $this->belongsToMany(Mission::class);
+    }
+    
+    public function area_interests()
+    {
+    return $this->belongsToMany(AreaInterest::class);
+    }
+
+    public function skills()
+    {
+    return $this->belongsToMany(Skill::class);
+    }
+    public function spiritual_gifts()
+    {
+    return $this->belongsToMany(SpiritualGift::class);
+    }
+
+    
 }
