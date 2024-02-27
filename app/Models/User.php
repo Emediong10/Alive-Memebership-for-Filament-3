@@ -33,6 +33,14 @@ class User extends Authenticatable
         'member_type_id',
         'chapter_id',
         'email',
+        'course_of_study',
+        'degree',
+        'occupation',
+        'professional_abilities',
+        'missions',
+        'area_interest',
+        'spiritual_gift',
+        'skills',
         'password',
     ];
 

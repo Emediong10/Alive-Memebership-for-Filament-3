@@ -22,6 +22,14 @@ return new class extends Migration
             $table->string('gender')->nullable();
             $table->string('dob')->nullable();
             $table->string('email')->unique();
+            $table->string('course_of_study')->nullable();
+            $table->string('degree')->nullable();
+            $table->string('occupation')->nullable();
+            $table->string('professional_abilities')->nullable();
+            $table->string('missions')->nullable();
+            $table->string('area_interest')->nullable();
+            $table->string('spiritual_gift')->nullable();
+            $table->string('skills')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
