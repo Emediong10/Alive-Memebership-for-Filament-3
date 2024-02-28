@@ -2,13 +2,19 @@
 
 namespace App\Filament\Resources\MemberTypeResource\Pages;
 
-use App\Filament\Resources\MemberTypeResource;
 use Filament\Actions;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
+use App\Filament\Resources\MemberTypeResource;
 
 class EditMemberType extends EditRecord
 {
     protected static string $resource = MemberTypeResource::class;
+
+    protected function getRedirectUrl(): string
+{
+    return $this->getResource()::getUrl('index');
+}
 
     protected function getSaveNotification(): ?Notification
 {

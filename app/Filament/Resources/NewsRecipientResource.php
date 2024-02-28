@@ -2,22 +2,26 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\NewsRecipientResource\Pages;
-use App\Filament\Resources\NewsRecipientResource\RelationManagers;
-use App\Models\NewsRecipient;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
+use App\Models\User;
 use Filament\Tables;
+use Filament\Forms\Form;
+use App\Models\MemberType;
 use Filament\Tables\Table;
+use App\Models\NewsRecipient;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Select;
+use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\NewsRecipientResource\Pages;
+use App\Filament\Resources\NewsRecipientResource\RelationManagers;
 
 class NewsRecipientResource extends Resource
 {
     protected static ?string $model = NewsRecipient::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-ticket';
 
     protected static ?string $navigationGroup = 'News Navigation';
 
@@ -25,7 +29,25 @@ class NewsRecipientResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Section::make('NewsRecipient')->schema([
+                    Select::make('news_id')->relationship('news','title')->searchable()->preload(),
+                    Select::make('recipient_type')->options([
+                        '1'=>'Individual',
+                        '2'=>'Group'
+                    ])->reactive(),
+                    Select::make('recipients')->options(function(callable $get){
+                          $type=$get('recipient_type');
+                          if($type==1)
+                          { 
+                            return User::all()->pluck('name','id');
+                          }
+                          elseif($type==2)
+                          {
+                            return MemberType::all()->pluck('type','id');
+                          }
+                    })->multiple(),
+                ])
+
             ]);
     }
 
@@ -33,7 +55,8 @@ class NewsRecipientResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('news.title'),
+                TextColumn::make('user.name'),
             ])
             ->filters([
                 //

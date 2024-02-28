@@ -2,9 +2,10 @@
 
 namespace App\Filament\Resources\AreaInterestResource\Pages;
 
-use App\Filament\Resources\AreaInterestResource;
 use Filament\Actions;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
+use App\Filament\Resources\AreaInterestResource;
 
 class EditAreaInterest extends EditRecord
 {

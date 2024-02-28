@@ -2,9 +2,10 @@
 
 namespace App\Filament\Resources\SpiritualGiftResource\Pages;
 
-use App\Filament\Resources\SpiritualGiftResource;
 use Filament\Actions;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
+use App\Filament\Resources\SpiritualGiftResource;
 
 class EditSpiritualGift extends EditRecord
 {
@@ -15,7 +16,7 @@ class EditSpiritualGift extends EditRecord
     return Notification::make()
         ->success()
         ->title('Spiritual Gift Updated')
-        ->body('The Spiritual Gift has been successfully upated.');
+        ->body('Spiritual Gift successfully upated.');
 }
 
     protected function getHeaderActions(): array

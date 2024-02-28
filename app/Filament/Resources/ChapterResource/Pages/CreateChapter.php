@@ -10,12 +10,17 @@ use App\Filament\Resources\ChapterResource;
 class CreateChapter extends CreateRecord
 {
     protected static string $resource = ChapterResource::class;
+   
+ protected function getRedirectUrl(): string
+{
+    return $this->getResource()::getUrl('index');
+}
 
     protected function getCreatedNotification(): ?Notification
 {
     return Notification::make()
         ->success()
         ->title('Chapter Created')
-        ->body('The Chapter has been created successfully.');
+        ->body('New Chapter created successfully.');
 }
 }

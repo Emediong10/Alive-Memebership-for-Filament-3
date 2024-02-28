@@ -2,9 +2,10 @@
 
 namespace App\Filament\Resources\SkillResource\Pages;
 
-use App\Filament\Resources\SkillResource;
 use Filament\Actions;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
+use App\Filament\Resources\SkillResource;
 
 class EditSkill extends EditRecord
 {
@@ -14,8 +15,8 @@ class EditSkill extends EditRecord
 {
     return Notification::make()
         ->success()
-        ->title('Skill Updated')
-        ->body('The Skill has been updated successfully.');
+        ->title('Skill Update')
+        ->body('Skill updated successfully.');
 }
 
     protected function getHeaderActions(): array

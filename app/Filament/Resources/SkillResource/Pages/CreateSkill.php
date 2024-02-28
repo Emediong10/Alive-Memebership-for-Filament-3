@@ -11,11 +11,16 @@ class CreateSkill extends CreateRecord
 {
     protected static string $resource = SkillResource::class;
 
+    protected function getRedirectUrl(): string
+{
+    return $this->getResource()::getUrl('index');
+}
+
     protected function getCreatedNotification(): ?Notification
     {
         return Notification::make()
             ->success()
             ->title('Skill Created')
-            ->body('The Skill has been created successfully.');
+            ->body('New Skill created successfully.');
     }
 }

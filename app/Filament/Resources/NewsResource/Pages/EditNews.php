@@ -2,8 +2,9 @@
 
 namespace App\Filament\Resources\NewsResource\Pages;
 
-use App\Filament\Resources\NewsResource;
 use Filament\Actions;
+use App\Filament\Resources\NewsResource;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
 
 class EditNews extends EditRecord
@@ -14,7 +15,7 @@ class EditNews extends EditRecord
 {
     return Notification::make()
         ->success()
-        ->title('News updated')
+        ->title('News update')
         ->body('The News has been successfully updated.');
 }
 

@@ -10,5 +10,8 @@ class CreateNewsRecipient extends CreateRecord
 {
     protected static string $resource = NewsRecipientResource::class;
 
-    
+    protected function getRedirectUrl(): string
+{
+    return $this->getResource()::getUrl('index');
+}
 }

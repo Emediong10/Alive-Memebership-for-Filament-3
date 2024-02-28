@@ -15,8 +15,8 @@ class EditMission extends EditRecord
 {
     return Notification::make()
         ->success()
-        ->title('Mission updated')
-        ->body('The Misssion has been successfully updated.');
+        ->title('Mission update')
+        ->body(' Mission successfully updated.');
 }
 
     protected function getHeaderActions(): array

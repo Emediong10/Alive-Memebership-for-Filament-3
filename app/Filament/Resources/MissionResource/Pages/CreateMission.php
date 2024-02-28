@@ -11,11 +11,16 @@ class CreateMission extends CreateRecord
 {
     protected static string $resource = MissionResource::class;
 
+    protected function getRedirectUrl(): string
+{
+    return $this->getResource()::getUrl('index');
+}
+
     protected function getCreatedNotification(): ?Notification
 {
     return Notification::make()
         ->success()
         ->title('Mission Created')
-        ->body('The Mission has been successfully created.');
+        ->body('New Mission successfully created.');
 }
 }

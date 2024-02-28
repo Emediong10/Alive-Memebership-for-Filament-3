@@ -11,11 +11,16 @@ class CreateMemberType extends CreateRecord
 {
     protected static string $resource = MemberTypeResource::class;
 
+        protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
+
     protected function getCreatedNotification(): ?Notification
 {
     return Notification::make()
         ->success()
         ->title('Membertype registered')
-        ->body('The Membertype has been created successfully.');
+        ->body('New Membertype created successfully.');
 }
 }

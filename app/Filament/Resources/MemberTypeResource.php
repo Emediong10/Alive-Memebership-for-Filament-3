@@ -2,22 +2,26 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\MemberTypeResource\Pages;
-use App\Filament\Resources\MemberTypeResource\RelationManagers;
-use App\Models\MemberType;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
+use App\Models\User;
 use Filament\Tables;
+use Filament\Forms\Form;
+use App\Models\MemberType;
 use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Section;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\MemberTypeResource\Pages;
+use App\Filament\Resources\MemberTypeResource\RelationManagers;
 
 class MemberTypeResource extends Resource
 {
     protected static ?string $model = MemberType::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-sun';
 
     protected static ?string $navigationGroup = 'Membertype Navigation';
 
@@ -25,7 +29,10 @@ class MemberTypeResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Section::make('New Member Type')->schema([
+                    TextInput::make('type')->required()
+                ])
+
             ]);
     }
 
@@ -33,7 +40,15 @@ class MemberTypeResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('type'),
+                TextColumn::make('applications_count')
+                ->counts('applications')
+                ->getStateUsing(function($record){
+                    $count = User::where('member_type_id',$record->id)->count();
+                    return $count;
+                })
+                ->label('Number of Applications')
+
             ])
             ->filters([
                 //
