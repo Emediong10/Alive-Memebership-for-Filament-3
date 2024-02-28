@@ -4,7 +4,7 @@
    {{-- <div class="text-center">
       <h2 class="text-capitalize">Complete The Eligibility Form To Sign in </h2>
    </div> --}}
-    <livewire:register/>
+    <livewire:registration/>
 </div>
 @livewireScripts()
 <style>

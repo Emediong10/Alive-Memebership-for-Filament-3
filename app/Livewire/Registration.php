@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
 use App\Models\User;
 use App\Models\Chapter;
-use App\Models\Application;
 use Livewire\Component;
+use App\Models\Application;
+use Illuminate\Support\Facades\Hash;
 
-class Register extends Component
+class Registration extends Component
+
 {
     public $chapters,$user;
     public $currentStep = 1;
@@ -17,10 +19,12 @@ class Register extends Component
 
 
     public function render()
+
     {
-        $this->chapters = Chapter::where('active',1)->get();
+
+    $this->chapters = Chapter::where('active',1)->get();
+        return view('livewire.registration');
         //dd($this->chapters);
-        return view('livewire.register');
     }
 
 
@@ -209,4 +213,5 @@ class Register extends Component
     {
 
     }
-}
+ }
+

@@ -19,7 +19,7 @@ class HomeController extends Controller
 
     public function registration()
     {
-        return view('Home.registration');
+        return view('Home.registrations');
     }
 
     public function eligibility()

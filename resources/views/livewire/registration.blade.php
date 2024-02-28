@@ -1,7 +1,5 @@
-
- <div>
-   {{-- wizard Starts--}}
-   <div class="container">
+<div>
+    <div class="container">
         @if(!empty($successMessage))
             <div class="alert alert-success">
                 {{ $successMessage }}
@@ -260,13 +258,4 @@
 
     
     </div>
-   {{-- wizard Ends --}}
-
 </div>
-
-
-
-
-  
-
-

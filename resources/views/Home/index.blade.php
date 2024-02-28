@@ -15,7 +15,7 @@
 							</div>
 							<a href="{{ route('registration') }}" class="button button-large fw-semibold button-rounded ls0 nott ms-0">Register Here</a>
 							<a href="{{ url('admin/login') }}" target ="blank" class="button button-large fw-semibold button-border button-rounded ls0 nott">Sign In</a><br>
-							<a href="{{ route('membership_standards') }}">Read Membership Standards here <i class="icon-caret-right1 position-relative" style="top: 2px"></i></a>
+							<a href="{{ route('membership_standards') }}" target="blank" >Read Membership Standards here</a>
 						</div>
 		<img src="assets/images/welcome2.png" alt="" class="slider-img parallax;"  data-400="margin-top:40px;adeInRight" style="border-radius: 15px; padding-left:60px; width: 500px;">
 					</div>
