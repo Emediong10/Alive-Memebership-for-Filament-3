@@ -22,6 +22,10 @@ class News extends Model
     {
         return $this->hasMany(NewsRecipient::class,'news_id');
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class,'news_id');
+    }
 }
 
 

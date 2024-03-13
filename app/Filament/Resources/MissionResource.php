@@ -23,6 +23,11 @@ class MissionResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-fire';
 
     protected static ?string $navigationGroup = 'Extra Details';
+    
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
 
     public static function form(Form $form): Form
     {
@@ -42,8 +47,15 @@ class MissionResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')->label('Missions Attended'),
-            ])
+            TextColumn::make('name')->label('Missions Attended'),
+            // TextColumn::make('applications_count')
+            // ->counts('applications')
+            // ->getStateUsing(function($record){
+            //     $count = Mission::where('missions_id',$record->id)->count();
+            //     return $count;
+            // })
+            // ->label('Number of Applications')
+             ])
             ->filters([
                 //
             ])

@@ -192,46 +192,46 @@
                         <div class="form-group">
                             <p>Do you intend to support the ministry of ALIVE Nigeria on a monthly basis?:</p>
                               <label class="radio-inline">
-                                <input type="radio" class="" wire:model="monthly_support" value="yes"> Yes
+                                <input type="radio" class="" wire:model.live="monthly_support" value="yes"> Yes
                               </label>
                               <label class="radio-inline">
-                                <input type="radio" class="" wire:model="monthly_support" value="No"> No
+                                <input type="radio" class="" wire:model.live="monthly_support" value="No"> No
                               </label> <br>
                               @error('monthly_support') <span class="error text-danger">{{ $message }}</span> @enderror
                         </div>
-                        @if($monthly_support == 'yes')
-                        <div class="form-group">
-                        <label for="">Specify Amount you intend to Support Alive Nigeria with</label>
-                        <input type="number" placeholder="Specify Amount in Naira" class="form-control" wire:model="monthly_amount" required></textarea>
-                        @error('monthly_amount') <span class="error text-danger">{{ $message }}</span> @enderror
-                        </div>
-        
-                        <div class="form-group">
-                            <label for="">Currency</label>
-                            <select class="form-control" name="currency" wire:model="currency" required>
-                                <option value="">Select Currency</option>
-                                <option value="NGN">Naira</option>
-                                <option value="USD">United States Dollars</option>
-                            </select>
-                        @error('currency') <span class="error text-danger">{{ $message }}</span> @enderror
+             @if($monthly_support == 'yes')
+            <div class="form-group">
+                <label for="">Specify Amount you intend to Support Alive Nigeria with</label>
+                <input type="number" placeholder="Specify Amount in Naira" class="form-control" wire:model.live="monthly_amount" required>
+                @error('monthly_amount') <span class="error text-danger">{{ $message }}</span> @enderror
+            </div>
+
+            <div class="form-group">
+                <label for="">Currency</label>
+                <select class="form-control" name="currency" wire:model="currency" required>
+                    <option value="">Select Currency</option>
+                    <option value="NGN">Naira</option>
+                    <option value="USD">United States Dollars</option>
+                </select>
+                @error('currency') <span class="error text-danger">{{ $message }}</span> @enderror
+            </div>
+            @endif
+            @if($monthly_amount >= '1000')
+                <div class="col-md-6 col-sm-12">
+                    <div class="form-group">
+                        <label for="password">Create Password:</label>
+                        <input type="password" id="password" wire:model="password" class="form-control" placeholder="Create a password">
+                        @error('password') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
-                        @if ($monthly_amount >='1000')
-                        
-                        <div class="col-md-6 col-sm-12">
-                            <div class="form-group">
-                                <label for="password">Create Password:</label>
-                                <input type="password" id="password" wire:model="password" class="form-control" placeholder="Create a password">
-                                @error('password') <span class="error text-danger">{{ $message }}</span> @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="password_confirmation">Confirm Password:</label>
-                                <input type="password" id="password_confirm" wire:model="confirm_password" class="form-control" placeholder="Confirm your password">
-                                @error('confirm_password') <span class="error text-danger">{{ $message }}</span> @enderror
-                            </div>
-                        </div>
-                      
-                       @endif
-                        @endif
+                    <div class="form-group">
+                        <label for="password_confirmation">Confirm Password:</label>
+                        <input type="password" id="password_confirm" wire:model="confirm_password" class="form-control" placeholder="Confirm your password">
+                        @error('confirm_password') <span class="error text-danger">{{ $message }}</span> @enderror
+                    </div>
+                </div>
+           
+        @endif
+
                         
                       </div>
                     

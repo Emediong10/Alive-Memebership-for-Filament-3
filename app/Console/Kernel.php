@@ -10,10 +10,29 @@ class Kernel extends ConsoleKernel
     /**
      * Define the application's command schedule.
      */
-    protected function schedule(Schedule $schedule): void
+    // protected function schedule(Schedule $schedule): void
+    // {
+    //     // $schedule->command('inspire')->hourly();
+    // }
+
+    protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->call(function () {
+            $users = \App\Models\User::all();
+    
+            foreach ($users as $user) {
+                if ($this->isBirthday($user->dob)) {
+             \Illuminate\Support\Facades\Mail::to($user->email)->send(new \App\Mail\BirthdayEmail($user));
+                }
+            }
+        })->daily()->at('14:00');
     }
+    
+    private function isBirthday($dob)
+    {
+        return \Carbon\Carbon::parse($dob)->isBirthday();
+    }
+    
 
     /**
      * Register the commands for the application.

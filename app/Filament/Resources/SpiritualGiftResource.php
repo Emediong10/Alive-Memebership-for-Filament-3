@@ -24,6 +24,11 @@ class SpiritualGiftResource extends Resource
 
     protected static ?string $navigationGroup = 'Extra Details';
 
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -50,7 +55,8 @@ class SpiritualGiftResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
+                Tables\Actions\DeleteAction::make(),
+               // Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([

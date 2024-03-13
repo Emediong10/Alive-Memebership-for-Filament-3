@@ -25,4 +25,9 @@ route::get('eligibility', [HomeController:: class,'eligibility']);
 route::get('eligible', [HomeController:: class,'eligible']);
 route::get('membership_standards', [HomeController:: class,'membership_standards'])->name('membership_standards');
 route::get('registration',[HomeController::class, 'registration'])->name('registration');
+
+// Auth::route([
+// 'verify'=>true
+// ]);
+
 route::get('application', [HomeController:: class,'application'])->name('application');

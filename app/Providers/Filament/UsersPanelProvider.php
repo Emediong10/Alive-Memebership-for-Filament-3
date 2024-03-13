@@ -3,11 +3,18 @@
 namespace App\Providers\Filament;
 
 use Filament\Pages;
+//use Filament\Navigation\MenuItem;
 use Filament\Panel;
 use Filament\Widgets;
 use Filament\PanelProvider;
 use Filament\Pages\Dashboard;
+//use App\Filament\Users\Pages\Profile;
+use App\Filament\Pages\Testing;
+
+use Filament\Navigation\MenuItem;
 use Filament\Support\Colors\Color;
+use Filament\Navigation\NavigationItem;
+use App\Filament\Users\Pages\EditProfile;
 use Filament\Http\Middleware\Authenticate;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -18,30 +25,50 @@ use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use App\Filament\Users\Pages\MyDetails;
 
-class AdminPanelProvider extends PanelProvider
+class UsersPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->default()
-            ->id('admin')
-            ->path('admin')
+            ->id('users')
+            ->path('users')
+           
             ->login()
             ->colors([
                 'primary' => Color::Green,
             ])  ->favicon(asset('assets/images/Aliveng.png'))
             ->brandLogo(asset('assets/images/Aliveng.png'))
-            ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
-            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
+            // ->colors([
+            //     'primary' => Color::Blue,
+            // ])
+            ->breadcrumbs(false)
+          
+          
+            ->discoverResources(in: app_path('Filament/Users/Resources'), for: 'App\\Filament\\Users\\Resources')
+            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Users\\Pages')
             ->pages([
-                Dashboard::class,
+              // pages\Dashboard::class,
+             Testing::class,
+               Dashboard::class,
+               MyDetails::class
             ])
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
+            ->discoverWidgets(in: app_path('Filament/Users/Widgets'), for: 'App\\Filament\\Users\\Widgets')
             ->widgets([
-                // Widgets\AccountWidget::class,
-                // Widgets\FilamentInfoWidget::class,
+                //Widgets\AccountWidget::class,
+                //Widgets\FilamentInfoWidget::class,
             ])
+            // ->navigationItems([
+            //     NavigationItem::make('Edit')
+            //        // ->url('users/profile')
+            //         ->icon('heroicon-o-presentation-chart-line')
+            //         // ->isActiveWhen(fn () => request()->routeIs('filament.users.resources.users.edit'))
+            //         ->label('Edit Profile')
+            //         ->sort(3)
+                       
+           
+          
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
@@ -57,7 +84,4 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ]);
     }
- 
-
 }
-

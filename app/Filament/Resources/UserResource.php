@@ -4,6 +4,9 @@ namespace App\Filament\Resources;
 
 use Filament\Forms;
 use App\Models\User;
+use App\Models\Mission;
+use Filament\Pages\Page;
+use App\Models\AreaInterest;
 use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
@@ -41,8 +44,17 @@ class UserResource extends Resource
                 TextInput::make('middlename'),
                 TextInput::make('lastname'),
                 TextInput::make('email'),
-                TextInput::make('phone')
-            ])
+                TextInput::make('phone'),
+                TextInput::make('course_of_study'),
+                TextInput::make('chapter.name'),
+                TextInput::make('member_type.type'),
+                TextInput::make('occupation'),
+                TextInput::make('professional_abilities'),
+            
+                TextInput::make('degree'),
+                TextInput::make('degree'),
+
+            ])->columns(2)
             ]);
     }
 
@@ -63,7 +75,7 @@ class UserResource extends Resource
                 TextColumn::make('degree')->searchable(),
                 TextColumn::make('occupation')->searchable(),
                 TextColumn::make('professional_abilities')->searchable(),
-                TextColumn::make('missions')->searchable(),
+               // TextColumn::make('mission_id')->searchable(),
                 TextColumn::make('area_interest')->searchable(),
                 TextColumn::make('spiritual_gift')->searchable(),
                 TextColumn::make('skills')->searchable(),

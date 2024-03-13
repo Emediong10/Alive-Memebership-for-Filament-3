@@ -7,6 +7,7 @@ use App\Models\Chapter;
 use Livewire\Component;
 use App\Models\Application;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 
 class Registration extends Component
 
@@ -25,6 +26,11 @@ class Registration extends Component
     $this->chapters = Chapter::where('active',1)->get();
         return view('livewire.registration');
         //dd($this->chapters);
+    }
+
+    public function updatedMonthlysupport($value)
+    {
+       // dd($value);
     }
 
 
@@ -100,7 +106,6 @@ class Registration extends Component
              } 
          
         $answers=[
-            
             'monthly_outreach'=>$this->monthly_outreach,
             'professional'=> $this->professional,
             'attended_mission'=> $this->attended_mission,
@@ -111,11 +116,7 @@ class Registration extends Component
             'currency'=> $this->currency
         ];
 
-        
-
-
-        
-        $user = User::create([
+         $user = User::create([
             'firstname'=>$this->firstname,
             'middlename'=>$this->middlename,
             'lastname'=>$this->lastname,
@@ -125,13 +126,16 @@ class Registration extends Component
             'phone'=>$this->phone,
             'chapter_id'=>$this->chapter,
             'password' =>\Hash::make($this->password),
-            
+       
           User::where('id')->update([
             //
         ])
     ]);
+//     $user()->sendEmailVerificationNotification();
+//  if($user != null)
+//  {
 
-
+//  }
         
         Application::create([
             // 'answers'=>json_encode($answers),
@@ -153,7 +157,7 @@ class Registration extends Component
             (($answers['currency'] === "NGN" || $answers['currency'] === "USD") && $answers['monthly_amount'] >= 10000)
         ) {
             $user->assignRole('financial');
-            $user->member_type_id = 2;
+            $user->member_type_id = 1;
             $this->successMsg = "Thank you for registering as a Financial Member with ALIVE-Nigeria for 2024. Let’s continually raise the banner of Christ higher. Maranatha!";
             $user->update();
         } elseif (
@@ -168,8 +172,8 @@ class Registration extends Component
                 $answers['monthly_amount'] <= 9999
             
         ) {
-            $user->assignRole('member');
-            $user->member_type_id = 5;
+            $user->assignRole('outreach');
+            $user->member_type_id = 2;
             $this->successMsg = "Thank you for registering as an Outreach Member with ALIVE-Nigeria for 2024. Let’s continually raise the banner of Christ higher. Maranatha!";
             $user->update();
         }
