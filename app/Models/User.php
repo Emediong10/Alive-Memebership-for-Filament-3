@@ -94,7 +94,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function missions()
     {
-    return $this->belongsToMany(Mission::class);
+       return $this->belongsToMany(Mission::class);
     }
     
     public function area_interests()

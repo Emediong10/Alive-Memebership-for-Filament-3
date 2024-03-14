@@ -1,6 +1,6 @@
 <x-filament-panels::page>
     @php
-    $licence = App\Models\User::where(['status'=>0,'id'=>auth()->user()->id])
+    $licence = App\Models\User::where(['course_of_study'=> null,'id'=>auth()->user()->id])
                             //   ->whereNull('course_of_study')
                             //   ->whereNull('degree')
                             //   ->whereNull('occupation')

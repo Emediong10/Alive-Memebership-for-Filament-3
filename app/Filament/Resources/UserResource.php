@@ -4,13 +4,14 @@ namespace App\Filament\Resources;
 
 use Filament\Forms;
 use App\Models\User;
-use App\Models\Mission;
-use Filament\Pages\Page;
-use App\Models\AreaInterest;
 use Filament\Tables;
+use App\Models\Mission;
 use Filament\Forms\Form;
+use Filament\Pages\Page;
 use Filament\Tables\Table;
+use App\Models\AreaInterest;
 use Filament\Resources\Resource;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Section;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
@@ -50,7 +51,8 @@ class UserResource extends Resource
                 TextInput::make('member_type.type'),
                 TextInput::make('occupation'),
                 TextInput::make('professional_abilities'),
-            
+                Select::make('missions')
+                 ->relationship(titleAttribute: 'name')->multiple()->preload(),
                 TextInput::make('degree'),
                 TextInput::make('degree'),
 

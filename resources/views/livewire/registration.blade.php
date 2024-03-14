@@ -250,7 +250,7 @@
    </div>
     @else
     <div class="text-center mt-5 mb-5">
-           <a href="{{ url('admin/login') }}" class="btn btn-success btn-lg">Proceed To Sign-in</a>
+           <a href="{{ url('users/login') }}" class="btn btn-success btn-lg">Proceed To Sign-in</a>
       </div>
     
     @endif

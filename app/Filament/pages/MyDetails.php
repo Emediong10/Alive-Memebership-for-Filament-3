@@ -72,19 +72,11 @@ class MyDetails extends Page implements HasInfolists
                 Textentry::make('occupation'),
                 Textentry::make('professional_abilities'),
             
-                TextEntry::make('missions')
-                ->label('Missions that I have Attended')
-
-                ->getStateUsing(function ($record) {
-                    $missionId = json_decode($record->mission_id);
-                    return collect($missionId)
-                     ->map(function ($missionId) {
-                      return Mission::find($missionId)->name ?? null;
-                  })
-                 ->filter()
-                 ->values()
-                ->all();
-                }),
+                RepeatableEntry::make('missions')
+                ->schema([
+                    TextEntry::make('name')->label(''),
+                    
+                ]),
 
 
             TextEntry::make('skills')

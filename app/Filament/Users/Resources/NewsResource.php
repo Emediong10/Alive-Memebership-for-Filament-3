@@ -21,6 +21,11 @@ class NewsResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-inbox';
 
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
     public static function form(Form $form): Form
     {
         return $form
