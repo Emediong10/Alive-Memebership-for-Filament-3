@@ -21,4 +21,16 @@ class NewsRecipient extends Model
         return $this->belongsTo(News::class,'news_id');
     }
 
+    public function getNameAttribute()
+    {
+        if($this->is_group)
+        {
+            return MemberType::where('id',$this->member_types_id)->first()->type;
+        }
+        else
+        {
+            return User::where('id', $this->user_id)->first()->name;
+        }
+    }
+
 }

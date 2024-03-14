@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\NewsRecipientResource\Pages;
 use App\Filament\Resources\NewsRecipientResource\RelationManagers;
+use Filament\Forms\Components\Section;
 
 class NewsRecipientResource extends Resource
 {
@@ -24,6 +25,12 @@ class NewsRecipientResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-ticket';
 
     protected static ?string $navigationGroup = 'News Navigation';
+    
+    protected static ?string $navigationLabel = 'Inbox';
+
+    protected static ?string $slug = 'inbox';
+
+    protected static ?string $breadcrumb = 'Inbox';
 
     public static function form(Form $form): Form
     {
@@ -56,14 +63,25 @@ class NewsRecipientResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('news.title'),
-                TextColumn::make('user.name'),
+                TextColumn::make('created_at')->label('Time Sent')->since()->sortable(), 
+
             ])
+            ->recordClasses(function(NewsRecipient $record){
+                if($record->read)
+                {
+                    return "font-light";
+                }
+                else
+                {
+                    return "font-bold";
+                }
+            })
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                //Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -87,5 +105,15 @@ class NewsRecipientResource extends Resource
             'view' => Pages\ViewNewsRecipient::route('/{record}'),
             'edit' => Pages\EditNewsRecipient::route('/{record}/edit'),
         ];
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return NewsRecipient::where(['read'=>0])->where(function($query){
+            $query->where('user_id',auth()->user()->id)
+            ->orWhere('member_types_id',auth()->user()->member_type)->whereNotNull('member_types_id');
+        })->whereHas('news',function($query){
+            $query->where('active',1);
+        })->count();
     }
 }

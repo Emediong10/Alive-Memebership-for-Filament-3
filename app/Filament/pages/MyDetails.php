@@ -75,12 +75,13 @@ class MyDetails extends Page implements HasInfolists
                 RepeatableEntry::make('missions')
                 ->schema([
                     TextEntry::make('name')->label('Attended Missions')
-                 ]),
-
-                RepeatableEntry::make('spiritual_gifts')
+                    
+                ]),
+                RepeatableEntry::make('spirituals')
                 ->schema([
-                    TextEntry::make('name')->label('Spiritual Gifts')
-                    ]),
+                    TextEntry::make('name')->label('Attended Missions')
+                    
+                ]),
 
 
             TextEntry::make('skills')
