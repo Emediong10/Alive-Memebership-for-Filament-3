@@ -12,9 +12,9 @@ class ViewNewsRecipient extends ViewRecord
 {
     protected static string $resource = NewsRecipientResource::class;
 
-    protected static ?string $title = 'jhhj';
+    protected static ?string $title ='';
 
-    
+   
     protected function getHeaderActions(): array
     {
         return [
@@ -24,7 +24,7 @@ class ViewNewsRecipient extends ViewRecord
    
     public function infolist(Infolist $infolist): Infolist
     {
-        self::$title=ucwords($this->record->title);
+        
         $this->record->update(['read'=>1]);
 
         return $infolist

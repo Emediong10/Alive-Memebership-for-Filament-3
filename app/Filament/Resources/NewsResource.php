@@ -47,7 +47,8 @@ class NewsResource extends Resource
                     RichEditor::make('content')->label('content'),
                     Select::make('recipient_type')->options([
                         '1'=>'Individual',
-                        '2'=>'Group'
+                        '2'=>'Group',
+                        '*'=>'All'
                     ])->reactive(),
                     Select::make('recipients')->options(function(callable $get){
                           $type=$get('recipient_type');
