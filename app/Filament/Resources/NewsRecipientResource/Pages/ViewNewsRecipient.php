@@ -24,9 +24,8 @@ class ViewNewsRecipient extends ViewRecord
    
     public function infolist(Infolist $infolist): Infolist
     {
-        
         $this->record->update(['read'=>1]);
-
+        
         return $infolist
         ->record($this->record)
         ->schema([
