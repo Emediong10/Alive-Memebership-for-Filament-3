@@ -44,7 +44,7 @@ class ProfileUpdate extends Page implements HasForms
  
     public static function shouldRegisterNavigation(): bool
     {
-        return true;
+        return false;
     }
  public $course_of_study;
 public $professional_abilities;

@@ -74,56 +74,32 @@ class MyDetails extends Page implements HasInfolists
             
                 RepeatableEntry::make('missions')
                 ->schema([
-                    TextEntry::make('name')->label('Attended Missions')
+                    TextEntry::make('name')
+                    ->color('success')
+                    ->label('')
                  ]),
 
                 RepeatableEntry::make('spiritual_gifts')
                 ->schema([
-                    TextEntry::make('name')->label('Spiritual Gifts')
+                    TextEntry::make('name')
+                    ->label('')
+                    ->color('success')
+                    ]),
+                RepeatableEntry::make('area_interests')
+                ->schema([
+                    TextEntry::make('name')
+                    ->color('success')
+                    ->label('')
+                    ]),
+                RepeatableEntry::make('skills')
+                ->schema([
+                    TextEntry::make('name')
+                    ->label('')
+                    ->color('success')
                     ]),
 
-
-            TextEntry::make('skills')
-            ->label('My Skills')
-            ->getStateUsing(function ($record) {
-                $skillIds = json_decode($record->skill_id);
-                return collect($skillIds)
-                 ->map(function ($skillId) {
-                  return Skill::find($skillId)->name ?? null;
-              })
-             ->filter()
-             ->values()
-            ->all();
-            }),
-            TextEntry::make('area_interests')
-            ->label('My areas Of Interest')
-            ->getStateUsing(function ($record) {
-                $areaInterestIds = json_decode($record->area_interest_id);
-                return collect($areaInterestIds)
-                    ->map(function ($areaInterestId) {
-                        return AreaInterest::find($areaInterestId)->name ?? null;
-                    })
-                    ->filter()
-                    ->values()
-                    ->all();
-            }),
-            TextEntry::make('spiritual_gifts')
-            ->label('My Sprirtual Gifts')
-    ->getStateUsing(function ($record) {
-        $spiritualGiftIds = is_array($record->spiritual_gift_id) ? $record->spiritual_gift_id : json_decode($record->spiritual_gift_id);
-        return collect($spiritualGiftIds)
-            ->map(function ($spiritualGiftId) {
-                return SpiritualGift::find($spiritualGiftId)->name ?? null;
-            })
-            ->filter()
-            ->values()
-            ->all();
-    }),
-
         
-
-                        
-                ])->columns(3),
+                ])->columns(4),
                
                 
                            ]);
