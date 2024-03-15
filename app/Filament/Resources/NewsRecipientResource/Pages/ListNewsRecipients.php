@@ -27,7 +27,7 @@ class ListNewsRecipients extends ListRecords
        return NewsRecipient::where(function($query){
             $query->where('user_id',auth()->user()->id)
             ->orWhere('member_types_id',auth()->user()->member_type)->whereNotNull('member_types_id')
-            ->orWhere('member_types_id','*');
+            ->orWhere('member_types_id',10);
         })->whereHas('news',function($query){
             $query->where('active',1);
         })->latest();

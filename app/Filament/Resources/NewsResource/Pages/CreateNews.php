@@ -90,7 +90,7 @@ function send()
                 [
                     'news_id'=>$news->id,
                     'is_group'=>true,
-                    'member_types_id'=>"*",
+                    'member_types_id'=>10,
                     'read'=>false,
                     'user_id'=>null
                 ]);

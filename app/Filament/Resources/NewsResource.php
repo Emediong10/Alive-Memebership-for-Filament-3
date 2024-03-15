@@ -48,7 +48,7 @@ class NewsResource extends Resource
                     Select::make('recipient_type')->options([
                         '1'=>'Individual',
                         '2'=>'Group',
-                        '*'=>'All'
+                        '3'=>'All'
                     ])->reactive(),
                     Select::make('recipients')->options(function(callable $get){
                           $type=$get('recipient_type');
