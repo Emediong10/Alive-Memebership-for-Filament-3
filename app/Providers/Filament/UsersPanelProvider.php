@@ -10,7 +10,7 @@ use Filament\PanelProvider;
 use Filament\Pages\Dashboard;
 //use App\Filament\Users\Pages\Profile;
 use App\Filament\Pages\Testing;
-
+use App\Filament\Resources\NewsRecipientResource;
 use Filament\Navigation\MenuItem;
 use Filament\Support\Colors\Color;
 use Filament\Navigation\NavigationItem;
@@ -25,7 +25,7 @@ use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
-use App\Filament\Users\Pages\MyDetails;
+//use App\Filament\Users\Pages\MyDetails;
 
 class UsersPanelProvider extends PanelProvider
 {
@@ -50,14 +50,17 @@ class UsersPanelProvider extends PanelProvider
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Users\\Pages')
             ->pages([
               // pages\Dashboard::class,
-             Testing::class,
+               //Testing::class,
                Dashboard::class,
-               MyDetails::class
+               //MyDetails::class
             ])
             ->discoverWidgets(in: app_path('Filament/Users/Widgets'), for: 'App\\Filament\\Users\\Widgets')
             ->widgets([
                 //Widgets\AccountWidget::class,
                 //Widgets\FilamentInfoWidget::class,
+            ])
+            ->resources([
+                NewsRecipientResource::class
             ])
             // ->navigationItems([
             //     NavigationItem::make('Edit')

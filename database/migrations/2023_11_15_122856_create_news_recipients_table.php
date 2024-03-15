@@ -16,9 +16,10 @@ return new class extends Migration
         Schema::create('news_recipients', function (Blueprint $table) {
             $table->id();
             $table->foreignId('news_id')->constrained('news')->nullable()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->boolean('is_group')->default(true);
-            $table->foreignId('member_types_id')->constrained('member_types')->nullable()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('user_id')->constrained('users')->nullable()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->boolean('is_group')->default(true)->nullable();
+            $table->foreignId('member_types_id')->nullable()->constrained('member_types')->nullable()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullable()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->boolean('read')->default(0);
             $table->timestamps();
         });
     }

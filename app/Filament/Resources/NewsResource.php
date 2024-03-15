@@ -20,6 +20,10 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\NewsResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\NewsResource\RelationManagers;
+use Filament\Forms\Get;
+use Filament\Forms\Set;
+use Filament\Tables\Columns\ToggleColumn;
+use Illuminate\Support\Str;
 
 class NewsResource extends Resource
 {
@@ -34,7 +38,7 @@ class NewsResource extends Resource
         return $form
             ->schema([
                 Section::make('View Application')->schema([
-                    TextInput::make('title')->required()->disabledOn('edit')->afterStateUpdated(function (Callable $get, Closure $set, $state) {
+                    TextInput::make('title')->required()->disabledOn('edit')->afterStateUpdated(function (Get $get, Set $set, $state) {
                         $set('slug', Str::slug($state));
                      })
                     ->debounce('500ms')
@@ -43,7 +47,8 @@ class NewsResource extends Resource
                     RichEditor::make('content')->label('content'),
                     Select::make('recipient_type')->options([
                         '1'=>'Individual',
-                        '2'=>'Group'
+                        '2'=>'Group',
+                        '*'=>'All'
                     ])->reactive(),
                     Select::make('recipients')->options(function(callable $get){
                           $type=$get('recipient_type');
@@ -69,7 +74,13 @@ class NewsResource extends Resource
             ->columns([
                 TextColumn::make('title')->searchable(),
                // TextColumn::make('content')->searchable(),
-                TextColumn::make('active')->searchable()
+                ToggleColumn::make('active')->searchable(),
+                TextColumn::make('recipient')->getStateUsing(function($record){
+                    return $record->recipient->count();
+                }),
+                TextColumn::make('recipient')->getStateUsing(function($record){
+                    return $record->recipient->pluck('name');
+                })->wrap()->badge()->separator(',')->label('Recipients')
             ])
             ->filters([
                 //
