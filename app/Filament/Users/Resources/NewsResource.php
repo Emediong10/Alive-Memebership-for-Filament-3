@@ -2,16 +2,18 @@
 
 namespace App\Filament\Users\Resources;
 
-use App\Filament\Users\Resources\NewsResource\Pages;
-use App\Filament\Users\Resources\NewsResource\RelationManagers;
-use App\Models\News;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
+use App\Models\News;
 use Filament\Tables;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Resources\Resource;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Users\Resources\NewsResource\Pages;
+use App\Filament\Users\Resources\NewsResource\RelationManagers;
 
 class NewsResource extends Resource
 {
@@ -21,16 +23,18 @@ class NewsResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-inbox';
 
+   protected static bool $shouldRegisterNavigation = false;
+
     public static function getNavigationBadge(): ?string
     {
-        return static::getModel()::count();
+        return static::getModel()::count() ;
     }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+               TextInput::make('title'),
             ]);
     }
 
@@ -38,7 +42,8 @@ class NewsResource extends Resource
     {
         return $table
             ->columns([
-                //
+               TextColumn::make('title'),
+               TextColumn::make('slug'),
             ])
             ->filters([
                 //
@@ -48,9 +53,9 @@ class NewsResource extends Resource
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                // Tables\Actions\BulkActionGroup::make([
+                //     Tables\Actions\DeleteBulkAction::make(),
+               // ]),
             ]);
     }
 
@@ -65,9 +70,9 @@ class NewsResource extends Resource
     {
         return [
             'index' => Pages\ListNews::route('/'),
-            'create' => Pages\CreateNews::route('/create'),
+            //'create' => Pages\CreateNews::route('/create'),
             'view' => Pages\ViewNews::route('/{record}'),
-            'edit' => Pages\EditNews::route('/{record}/edit'),
+            //'edit' => Pages\EditNews::route('/{record}/edit'),
         ];
     }
 }

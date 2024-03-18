@@ -74,7 +74,6 @@ class MyDetails extends Page implements HasInfolists
             
                 RepeatableEntry::make('missions')
                 ->schema([
-<<<<<<< HEAD
                     TextEntry::make('name')
                     ->color('success')
                     ->label('')
@@ -98,16 +97,6 @@ class MyDetails extends Page implements HasInfolists
                     ->label('')
                     ->color('success')
                     ]),
-=======
-                    TextEntry::make('name')->label('Attended Missions')
-                    
-                ]),
-                RepeatableEntry::make('spirituals')
-                ->schema([
-                    TextEntry::make('name')->label('Attended Missions')
-                    
-                ]),
->>>>>>> da3bc174107ec4f54593673eb9d1dff802d27116
 
         
                 ])->columns(4),

@@ -13,9 +13,11 @@ use Filament\Forms\Components\Section;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
+// use RelationManagers\UsersRelationManager;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\MemberTypeResource\Pages;
 use App\Filament\Resources\MemberTypeResource\RelationManagers;
+use App\Filament\Resources\MemberTypeResource\RelationManagers\UserRelationManager;
 
 class MemberTypeResource extends Resource
 {
@@ -67,7 +69,7 @@ class MemberTypeResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\UsersRelationManager::class
         ];
     }
 
