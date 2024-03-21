@@ -127,11 +127,11 @@ class Registration extends Component
             'chapter_id'=>$this->chapter,
             'password' =>\Hash::make($this->password),
        
+           // $user()->sendEmailVerificationNotification(),
           User::where('id')->update([
             //
         ])
     ]);
-//     $user()->sendEmailVerificationNotification();
 //  if($user != null)
 //  {
 
@@ -146,15 +146,15 @@ class Registration extends Component
            ]);
            
 
-          // dd($answers);
+         // dd($answers);
           if (
-            ($answers['monthly_outreach'] === "yes" || $answers['monthly_outreach'] === "no") &&
-            ($answers['professional'] === "yes" || $answers['professional'] === "no") &&
+            ($answers['monthly_outreach'] == "yes" || $answers['monthly_outreach'] == "no") &&
+            ($answers['professional'] == "yes" || $answers['professional'] == "no") &&
             $answers['will_support'] === "10k" &&
-            ($answers['christian_standard'] === "yes" || $answers['christian_standard'] === "yes") &&
-            ($answers['attended_mission'] === "yes" || $answers['attended_mission'] === "no") &&
-            $answers['monthly_support'] === "yes" &&
-            (($answers['currency'] === "NGN" || $answers['currency'] === "USD") && $answers['monthly_amount'] >= 10000)
+            ($answers['christian_standard'] == "yes" || $answers['christian_standard'] == "no") &&
+            ($answers['attended_mission'] == "yes" || $answers['attended_mission'] == "no") &&
+            $answers['monthly_support'] == "yes" &&
+            (($answers['currency'] == "NGN" || $answers['currency'] == "USD") && $answers['monthly_amount'] >= 10000)
         ) {
             $user->assignRole('financial');
             $user->member_type_id = 1;

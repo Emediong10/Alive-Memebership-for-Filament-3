@@ -90,7 +90,7 @@
                     </div>
                     <div class="form-group">
                         <label for="description">Email:</label>
-                        <input type="email" wire:model="email" class="form-control" id="email" />
+                        <input type="email" wire:model="email" class="form-control" id="email"  placeholder="Please use a valid email for this registration"/>
                         @error('email') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">

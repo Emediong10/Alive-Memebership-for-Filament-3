@@ -65,35 +65,35 @@
 				<div class="row">
 
 					<div class="col-6 col-md-12 col-lg-6 clearfix bottommargin-sm">
-							<a href="#" class="social-icon si-dark si-colored si-facebook mb-0" style="margin-right: 10px;">
+							<a href="https://web.facebook.com/alivenigeria"class="social-icon si-dark si-colored si-facebook mb-0" style="margin-right: 10px;"  target="blank">
 							<i class="icon-facebook"></i>
 										<i class="icon-facebook"></i>
 							</a>
-						<a href="https://web.facebook.com/alivenigeria"><small style="display: block; margin-top: 3px;"><strong>Follow us</strong><br>on Facebook</small></a>
+						<a href="https://web.facebook.com/alivenigeria"  target="blank"><small style="display: block; margin-top: 3px;"><strong>Follow us</strong><br>on Facebook</small></a>
 							</div>
 
 			<div class="col-6 col-md-12 col-lg-6 clearfix bottommargin-sm">
-								<a href="#" class="social-icon si-dark si-colored si-twitter mb-0" style="margin-right: 10px;">
+								<a href="https://twitter.com/i/flow/login?redirect_after_login=%2FALIVENIGERIA1" class="social-icon si-dark si-colored si-twitter mb-0" style="margin-right: 10px;"  target="blank">
 								<i class="icon-twitter"></i>
 											<i class="icon-twitter"></i>
 								</a>
-							<a href="https://twitter.com/i/flow/login?redirect_after_login=%2FALIVENIGERIA1"><small style="display: block; margin-top: 3px;"><strong>Follow us</strong><br>on Twitter</small></a>
+							<a href="https://twitter.com/i/flow/login?redirect_after_login=%2FALIVENIGERIA1"  target="blank"><small style="display: block; margin-top: 3px;"><strong>Follow us</strong><br>on Twitter</small></a>
 								</div>
 
 							<div class="col-6 col-md-12 col-lg-6 clearfix bottommargin-sm">
-								<a href="#" class="social-icon si-dark si-colored si-instagram mb-0" style="margin-right: 10px;">
+								<a href="https://www.instagram.com/alive.nigeria/" class="social-icon si-dark si-colored si-instagram mb-0" style="margin-right: 10px;"  target="blank">
 								<i class="icon-instagram"></i>
 								<i class="icon-instagram"></i>
 								</a>
-							<a href="https://www.instagram.com/alive.nigeria/"><small style="display: block; margin-top: 3px;"><strong>Follow us</strong><br>on Instagram</small></a> 
+							<a href="https://www.instagram.com/alive.nigeria/"  target="blank"><small style="display: block; margin-top: 3px;"><strong>Follow us</strong><br>on Instagram</small></a> 
 							</div>
 
 								<div class="col-6 col-md-12 col-lg-6 clearfix bottommargin-sm">
-								<a href="#" class="social-icon si-dark si-colored si-youtube mb-0" style="margin-right: 10px;">
+								<a href="https://www.youtube.com/user/AlivenigeriaSDA" class="social-icon si-dark si-colored si-youtube mb-0" style="margin-right: 10px;"  target="blank">
 								<i class="icon-youtube"></i>
 											<i class="icon-youtube"></i>
 								</a>
-							<a href="https://www.youtube.com/user/AlivenigeriaSDA"><small style="display: block; margin-top: 3px;"><strong>Follow and Subscribe to us</strong><br>on Youtube</small></a>
+							<a href="https://www.youtube.com/user/AlivenigeriaSDA"  target="blank"><small style="display: block; margin-top: 3px;"><strong>Follow and Subscribe to us</strong><br>on Youtube</small></a>
 								
 							</div>
 

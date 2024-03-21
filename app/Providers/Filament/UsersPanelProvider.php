@@ -25,6 +25,8 @@ use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
+use Swis\Filament\Backgrounds\ImageProviders\MyImages;
 //use App\Filament\Users\Pages\MyDetails;
 
 class UsersPanelProvider extends PanelProvider
@@ -36,6 +38,7 @@ class UsersPanelProvider extends PanelProvider
             ->path('users')
            
             ->login()
+            ->emailVerification()
             ->colors([
                 'primary' => Color::Green,
             ])  ->favicon(asset('assets/images/Aliveng.png'))
@@ -44,6 +47,10 @@ class UsersPanelProvider extends PanelProvider
             //     'primary' => Color::Blue,
             // ])
             ->breadcrumbs(false)
+            ->plugins([
+                FilamentBackgroundsPlugin::make()
+                ->showAttribution(false),
+            ])
           
           
             ->discoverResources(in: app_path('Filament/Users/Resources'), for: 'App\\Filament\\Users\\Resources')
