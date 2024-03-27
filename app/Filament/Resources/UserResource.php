@@ -16,8 +16,11 @@ use Filament\Forms\Components\Section;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
+use RelationManagers\SkillsRelationManager;
 use App\Filament\Resources\UserResource\Pages;
+use RelationManagers\AreaInterestsRelationManager;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use RelationManagers\SpiritualGiftsRelationManager;
 use App\Filament\Resources\UserResource\RelationManagers;
 
 class UserResource extends Resource
@@ -51,10 +54,10 @@ class UserResource extends Resource
                 TextInput::make('member_type.type'),
                 TextInput::make('occupation'),
                 TextInput::make('professional_abilities'),
-                Select::make('missions')
-                 ->relationship(titleAttribute: 'name')->multiple()->preload(),
+                // Select::make('missions')
+                //  ->relationship(titleAttribute: 'name')->multiple()->preload(),
                 TextInput::make('degree'),
-                TextInput::make('degree'),
+               // TextInput::make('degree'),
 
             ])->columns(2)
             ]);
@@ -78,9 +81,9 @@ class UserResource extends Resource
                 TextColumn::make('occupation')->searchable(),
                 TextColumn::make('professional_abilities')->searchable(),
                // TextColumn::make('mission_id')->searchable(),
-                TextColumn::make('area_interest')->searchable(),
-                TextColumn::make('spiritual_gift')->searchable(),
-                TextColumn::make('skills')->searchable(),
+                // TextColumn::make('area_interest')->searchable(),
+                // TextColumn::make('spiritual_gift')->searchable(),
+                // TextColumn::make('skills')->searchable(),
                 
                 ])
             ->filters([
@@ -100,7 +103,10 @@ class UserResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\MissionsRelationManager::class,
+            RelationManagers\AreaInterestsRelationManager::class,
+            RelationManagers\SpiritualGiftsRelationManager::class,
+            RelationManagers\SkillsRelationManager::class
         ];
     }
 

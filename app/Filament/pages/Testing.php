@@ -16,9 +16,9 @@ class Testing extends Page implements HasInfolists
 {
     Use InteractsWithInfolists;
 
-    protected static ?string $navigationLabel = 'Profile';
+    protected static ?string $navigationLabel = 'Profe';
 
-    protected static ?string $navigationGroup = 'My Profile';
+    protected static ?string $navigationGroup = 'My ';
 
     protected static ?string $navigationIcon = 'heroicon-o-user';
 

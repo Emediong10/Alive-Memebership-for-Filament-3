@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Parallax\FilamentComments\Models\Traits\HasFilamentComments;
 use Illuminate\Database\Eloquent\Model;
 
 class NewsRecipient extends Model
 {
+    use HasFilamentComments;
     use HasFactory;
 
     protected $guarded = [];

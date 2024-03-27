@@ -3,6 +3,8 @@
 namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
+use Parallax\FilamentComments\Models\FilamentComment;
+
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
@@ -17,6 +19,10 @@ class Kernel extends ConsoleKernel
 
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command('model:prune', [
+            '--model' => [FilamentComment::class],
+        ])->daily();
+
         $schedule->call(function () {
             $users = \App\Models\User::all();
     
@@ -25,7 +31,7 @@ class Kernel extends ConsoleKernel
              \Illuminate\Support\Facades\Mail::to($user->email)->send(new \App\Mail\BirthdayEmail($user));
                 }
             }
-        })->daily()->at('14:00');
+    })->daily()->at('07:00');
     }
     
     private function isBirthday($dob)
@@ -43,4 +49,6 @@ class Kernel extends ConsoleKernel
 
         require base_path('routes/console.php');
     }
+
+   
 }

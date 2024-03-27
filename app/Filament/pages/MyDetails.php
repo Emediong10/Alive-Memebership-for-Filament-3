@@ -22,7 +22,6 @@ use Filament\Infolists\Concerns\InteractsWithInfolists;
 
 class MyDetails extends Page implements HasInfolists
 
-
 {
      protected static ?string $navigationLabel = 'Profile';
 
@@ -32,7 +31,7 @@ class MyDetails extends Page implements HasInfolists
 
     protected static ?string $navigationIcon = 'heroicon-o-user';
 
-    protected static string $view = 'filament.pages.testing';
+    protected static string $view = 'filament.users.pages.my-details';
 
     public $user;
 
@@ -58,19 +57,32 @@ class MyDetails extends Page implements HasInfolists
               ->collapsible()
               ->description('My Profile') 
               ->schema([
-              Textentry::make('firstname'),
-              Textentry::make('middlename'),
-              Textentry::make('lastname'),
-              Textentry::make('phone'),
-              Textentry::make('email'),
-              Textentry::make('chapter.name'), 
+              Textentry::make('firstname')
+              ->color('success'),
+              Textentry::make('middlename')
+              ->color('success'),
+              Textentry::make('lastname')
+              ->color('success')
+              ,
+              Textentry::make('phone')
+              ->color('success'),
+              Textentry::make('email')
+              ->color('success'),
+              Textentry::make('chapter.name')
+              ->color('success'), 
          
-                Textentry::make('gender'),
-                Textentry::make('dob'),
-                Textentry::make('course_of_study'),
-                Textentry::make('degree'),
-                Textentry::make('occupation'),
-                Textentry::make('professional_abilities'),
+                Textentry::make('gender')
+                ->color('success'),
+                Textentry::make('dob')
+                ->color('success'),
+                Textentry::make('course_of_study')
+                ->color('success'),
+                Textentry::make('degree')
+                ->color('success'),
+                Textentry::make('occupation')
+                ->color('success'),
+                Textentry::make('professional_abilities')
+                ->color('success'),
             
                 RepeatableEntry::make('missions')
                 ->schema([

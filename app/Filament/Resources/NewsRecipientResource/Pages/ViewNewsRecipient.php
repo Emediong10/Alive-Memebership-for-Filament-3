@@ -3,6 +3,10 @@
 namespace App\Filament\Resources\NewsRecipientResource\Pages;
 
 use App\Filament\Resources\NewsRecipientResource;
+//use Parallax\FilamentComments\Actions\CommentsAction;
+use Parallax\FilamentComments\Infolists\Components\CommentsEntry;
+use Parallax\FilamentComments\Actions\CommentsAction;
+
 use Filament\Actions;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
@@ -18,7 +22,8 @@ class ViewNewsRecipient extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-           // Actions\EditAction::make(),
+           // Actions\EditAction::make()
+           CommentsAction::make(),
         ];
     }
    
@@ -30,7 +35,9 @@ class ViewNewsRecipient extends ViewRecord
         ->record($this->record)
         ->schema([
             TextEntry::make('news.title')->label('Title'),
-            TextEntry::make('news.content')->html()->label('Content')
+            TextEntry::make('news.content')->html()->label('Content'),
+             CommentsEntry::make('filament_comments'),
+            
         ])->columns(1);
     }
 
