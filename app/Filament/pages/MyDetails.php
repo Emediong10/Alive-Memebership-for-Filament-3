@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Users\Pages;
+namespace App\Filament\Pages;
 // namespace App\Filament\Pages;
 use App\Models\User;
 use App\Models\Skill;

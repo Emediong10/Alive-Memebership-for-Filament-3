@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\NewsRecipientResource\Pages;
 use App\Filament\Resources\NewsRecipientResource\RelationManagers;
-use Parallax\FilamentComments\Tables\Actions\CommentsAction;
+//use Parallax\FilamentComments\Tables\Actions\CommentsAction;
 
 use Filament\Forms\Components\Section;
 
@@ -78,7 +78,7 @@ class NewsRecipientResource extends Resource
                     return "font-bold";
                 }
             }) ->actions([
-                CommentsAction::make(),
+               // CommentsAction::make(),
             ])
             ->filters([
                 //

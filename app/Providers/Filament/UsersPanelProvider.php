@@ -7,26 +7,29 @@ use Filament\Pages;
 use Filament\Panel;
 use Filament\Widgets;
 use Filament\PanelProvider;
-use Filament\Pages\Dashboard;
+//use Filament\Pages\Dashboard;
 //use App\Filament\Users\Pages\Profile;
 use App\Filament\Pages\Testing;
-use App\Filament\Resources\NewsRecipientResource;
+use App\Filament\Pages\Dashboard;
+use App\Filament\Pages\MyDetails;
 use Filament\Navigation\MenuItem;
 use Filament\Support\Colors\Color;
+use App\Filament\Pages\ProfileUpdate;
 use Filament\Navigation\NavigationItem;
 use App\Filament\Users\Pages\EditProfile;
 use Filament\Http\Middleware\Authenticate;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
+use App\Filament\Resources\NewsRecipientResource;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Swis\Filament\Backgrounds\ImageProviders\MyImages;
 use Filament\Http\Middleware\DisableBladeIconComponents;
+use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
-use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
-use Swis\Filament\Backgrounds\ImageProviders\MyImages;
 //use App\Filament\Users\Pages\MyDetails;
 
 class UsersPanelProvider extends PanelProvider
@@ -57,9 +60,9 @@ class UsersPanelProvider extends PanelProvider
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Users\\Pages')
             ->pages([
               // pages\Dashboard::class,
-               //Testing::class,
-               Dashboard::class,
-               //MyDetails::class
+               ProfileUpdate::class,
+              Dashboard::class,
+               MyDetails::class
             ])
             ->discoverWidgets(in: app_path('Filament/Users/Widgets'), for: 'App\\Filament\\Users\\Widgets')
             ->widgets([

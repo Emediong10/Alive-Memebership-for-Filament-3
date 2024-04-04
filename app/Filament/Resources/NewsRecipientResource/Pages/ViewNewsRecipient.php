@@ -4,8 +4,8 @@ namespace App\Filament\Resources\NewsRecipientResource\Pages;
 
 use App\Filament\Resources\NewsRecipientResource;
 //use Parallax\FilamentComments\Actions\CommentsAction;
-use Parallax\FilamentComments\Infolists\Components\CommentsEntry;
-use Parallax\FilamentComments\Actions\CommentsAction;
+//use Parallax\FilamentComments\Infolists\Components\CommentsEntry;
+//use Parallax\FilamentComments\Actions\CommentsAction;
 
 use Filament\Actions;
 use Filament\Infolists\Components\TextEntry;
@@ -23,7 +23,7 @@ class ViewNewsRecipient extends ViewRecord
     {
         return [
            // Actions\EditAction::make()
-           CommentsAction::make(),
+        //   CommentsAction::make(),
         ];
     }
    
@@ -36,7 +36,7 @@ class ViewNewsRecipient extends ViewRecord
         ->schema([
             TextEntry::make('news.title')->label('Title'),
             TextEntry::make('news.content')->html()->label('Content'),
-             CommentsEntry::make('filament_comments'),
+           //  CommentsEntry::make('filament_comments'),
             
         ])->columns(1);
     }
