@@ -34,6 +34,8 @@ class UsersRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('middlename')->searchable(),
                 Tables\Columns\TextColumn::make('lastname')->searchable(),
                 Tables\Columns\TextColumn::make('chapter.name')->searchable()->sortable(),
+                Tables\Columns\TextColumn::make('member_type.type')->searchable()->sortable(),
+                // TextColumn::make('')->sortable()->searchable(),
                 Tables\Columns\TextColumn::make('email')->searchable(),
                 Tables\Columns\TextColumn::make('phone'),
             ])

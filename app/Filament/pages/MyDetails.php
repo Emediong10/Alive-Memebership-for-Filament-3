@@ -33,6 +33,14 @@ class MyDetails extends Page implements HasInfolists
 
     protected static string $view = 'filament.users.pages.my-details';
 
+    public static function shouldRegisterNavigation(): bool
+    {
+        if(auth()->user()->hasRole(['admin'])){
+            return false;
+        }
+        return  true;
+    }
+
     public $user;
 
     public function mount(): void
