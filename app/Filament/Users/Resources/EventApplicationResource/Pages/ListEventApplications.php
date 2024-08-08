@@ -13,10 +13,19 @@ class ListEventApplications extends ListRecords
 {
     protected static string $resource = EventApplicationResource::class;
 
+
+
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()
+            ->visible(function(){
+                if(auth()->user()->hasRole('admin')){
+                    return true;
+                }else{
+                    return false;
+                }
+            }),
         ];
     }
 

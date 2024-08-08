@@ -41,7 +41,7 @@ class UsersPanelProvider extends PanelProvider
             ->path('users')
            
             ->login()
-            ->emailVerification()
+           // ->emailVerification()
             ->colors([
                 'primary' => Color::Green,
             ])  ->favicon(asset('assets/images/Aliveng.png'))
@@ -72,13 +72,7 @@ class UsersPanelProvider extends PanelProvider
             ->resources([
                 NewsRecipientResource::class
             ])
-            // ->navigationItems([
-            //     NavigationItem::make('Edit')
-            //        // ->url('users/profile')
-            //         ->icon('heroicon-o-presentation-chart-line')
-            //         // ->isActiveWhen(fn () => request()->routeIs('filament.users.resources.users.edit'))
-            //         ->label('Edit Profile')
-            //         ->sort(3)
+           
                        
            
           

@@ -9,4 +9,6 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateEventApplication extends CreateRecord
 {
     protected static string $resource = EventApplicationResource::class;
+
+   
 }

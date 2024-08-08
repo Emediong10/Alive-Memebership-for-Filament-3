@@ -2,31 +2,28 @@
 
 namespace App\Filament\Users\Resources;
 
-use App\Filament\Users\Resources\EventApplicationResource\Pages;
-use App\Filament\Users\Resources\EventApplicationResource\RelationManagers;
-use App\Models\EventApplicants;
-use App\Models\EventApplication;
-use Filament\Forms;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
-use Filament\Notifications\Notification;
-use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Actions\Action;
-use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Models\EventApplicants;
+use Filament\Resources\Resource;
+use Filament\Tables\Actions\Action;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\Textarea;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
+use Filament\Forms\Components\FileUpload;
+use Filament\Tables\Columns\ToggleColumn;
+use App\Filament\Users\Resources\EventApplicationResource\Pages;
 
 class EventApplicationResource extends Resource
 {
     protected static ?string $model = EventApplicants::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    
+
     protected static ?string $title = 'Event Application';
 
     protected static ?string $navigationLabel = 'Event Application';
@@ -36,7 +33,8 @@ class EventApplicationResource extends Resource
     {
         return $form
             ->schema([
-                //
+
+            // Toggle::make('confirmconfirm_attendance')->label('Did you attend the Event??')
             ]);
     }
 
@@ -49,25 +47,21 @@ class EventApplicationResource extends Resource
                 TextColumn::make('venue')->label('Venue')->searchable(),
                 TextColumn::make('start_date')->label('Start Date')->sortable()->searchable(),
                 TextColumn::make('end_date')->label('End Date')->sortable()->searchable(),
-                TextColumn::make('event_fees')->label('Fees')->getStateUsing(function($record){
-                    return $record->event_fees." ".$record->event_fees_currency;
+               // ToggleColumn::make('confirm_attendance')->label('Confirm your attendance after the event??'),
+                TextColumn::make('event_fees')->label('Fees')->getStateUsing(function ($record) {
+                    return $record->event_fees.' '.$record->event_fees_currency;
                 }),
-                TextColumn::make("")->label("Status")->getStateUsing(function($record){
-                    $event_id=$record->id;
-                    $applicant_id=auth()->user()->id;
-                    $event=EventApplicants::where(['event_id'=>$event_id,'user_id'=>$applicant_id])->first();
-                    if($event){
-                        if($event->approval_status==0)
-                        {
-                            return "Application Pending";
-                        }
-                        elseif($event->approval_status==1)
-                        {
-                            return "Application Approved";
-                        }
-                        elseif($event->approval_status==2)
-                        {   
-                            return "Application Denied";
+                TextColumn::make('')->label('Status')->getStateUsing(function ($record) {
+                    $event_id = $record->id;
+                    $applicant_id = auth()->user()->id;
+                    $event = EventApplicants::where(['event_id' => $event_id, 'user_id' => $applicant_id])->first();
+                    if ($event) {
+                        if ($event->approval_status == 0) {
+                            return 'Application Pending';
+                        } elseif ($event->approval_status == 1) {
+                            return 'Application Approved';
+                        } elseif ($event->approval_status == 2) {
+                            return 'Application Denied';
                         }
                     }
                 })->sortable(),
@@ -77,26 +71,27 @@ class EventApplicationResource extends Resource
             ])
             ->actions([
                 //Tables\Actions\EditAction::make(),
-                Action::make("Apply")->action(function($record, $data){
+                Action::make('Apply')->action(function ($record, $data) {
                     EventApplicants::create([
-                        'event_id'=>$record->id,
-                        'user_id'=>auth()->user()->id,
-                        'approval_status'=>0,
-                        'comments'=>$data['comments'],
-                        'confirm_attendance'=>0,
-                        'attendance_confirmed'=>0
+                        'event_id' => $record->id,
+                        'user_id' => auth()->user()->id,
+                        'approval_status' => 0,
+                        'comments' => $data['comments'],
+                        'confirm_attendance' => 0,
+                         'attendance_confirmed' => 0,
                     ]);
                     Notification::make()->title('Application made Successfully')->send()->success();
                 })->requiresConfirmation()->form([
-                    Textarea::make('comments')
+                    Textarea::make('comments'),
                 ])->visible(
-                    function($record){
-                        $event_id=$record->id;
-                        $applicant_id=auth()->user()->id;
-                        $event_exists=EventApplicants::where(['event_id'=>$event_id,'user_id'=>$applicant_id])->first();
-                        if($event_exists){
+                    function ($record) {
+                        $event_id = $record->id;
+                        $applicant_id = auth()->user()->id;
+                        $event_exists = EventApplicants::where(['event_id' => $event_id, 'user_id' => $applicant_id])->first();
+                        if ($event_exists) {
                             return false;
                         }
+
                         return true;
                     }
                 ),
@@ -104,7 +99,7 @@ class EventApplicationResource extends Resource
                     $event_id=$record->id;
                     $applicant_id=auth()->user()->id;
                     $event=EventApplicants::where(['event_id'=>$event_id,'user_id'=>$applicant_id])->first();
-                    $supplementary_payments=array_sum(array_column($event->supplementary_payments,'amount_paid'));
+                    $supplementary_payments =array_sum(array_column($event->supplementary_payments,'amount_paid'));
                     $amount_paid=$event->amount_paid+$supplementary_payments;
                     //dd($amount_paid);
                     if($event &&( $event->amount_paid==null || $event->amount_paid== 0)){
@@ -130,6 +125,8 @@ class EventApplicationResource extends Resource
                         Notification::make()->title('Payment Details updated')->send()->success();
                     }
 
+
+
                 })->visible(function($record){
                     $event_id=$record->id;
                     $applicant_id=auth()->user()->id;
@@ -141,10 +138,10 @@ class EventApplicationResource extends Resource
                         return true;
                     }
                     elseif($event_exists && (int)$amount_paid>=(int)$event_exists->event->event_fees){
-                        
+
                         return false;
                     }
-                    
+
                     return false;
                 })->form([
                        TextInput::make('transaction_reference')->helperText('Code For Referencing transaction')->hint('This could be the transaction reference number generated after transfer or the bank teller number on a bank deposit slip')->required(),
@@ -155,7 +152,9 @@ class EventApplicationResource extends Resource
                        ])->required(),
                        FileUpload::make('payment_evidence')->directory('images/payment_evidence')->required(),
                 ])
-            ])
+                ])
+
+        //       
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
@@ -178,5 +177,6 @@ class EventApplicationResource extends Resource
             'edit' => Pages\EditEventApplication::route('/{record}/edit'),
         ];
     }
+
 
 }

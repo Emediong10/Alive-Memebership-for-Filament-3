@@ -45,10 +45,10 @@ class Registration extends Component
             'gender' => 'required',
             'chapter' => 'required',
             'email'=>'required|email|unique:users,email',
-            'phone'=>'required|unique:users,phone',
+           // 'phone'=>'required|unique:users,phone',
          ]);
         //  dd($this->phone);
-      
+
 
         // $this->successMsg = "Saved";
         $this->currentStep = 2;
@@ -67,17 +67,17 @@ class Registration extends Component
     {
         $this->validate([
             'monthly_outreach' => 'required',
-        
+
                 'christian_standard'=>'required',
                 'attended_mission'=>'required',
                 'professional'=>'required',
                 'will_support'=>'required',
-               
+
             ]);
-        
-            
+
+
         //    dd(json_encode($answers));
-    
+
 
         //$this->successMsg = "Saved";
         $this->currentStep = 3;
@@ -97,14 +97,14 @@ class Registration extends Component
                 'currency'=>'required',
             ]);
         }
-   if($this->monthly_amount >='1000') 
+   if($this->monthly_amount >='1000')
    {
          $this->validate([
                 'password' => 'required|min:8',
                 'confirm_password' => 'required|same:password'
          ]);
-             } 
-         
+             }
+
         $answers=[
             'monthly_outreach'=>$this->monthly_outreach,
             'professional'=> $this->professional,
@@ -126,7 +126,7 @@ class Registration extends Component
             'phone'=>$this->phone,
             'chapter_id'=>$this->chapter,
             'password' =>\Hash::make($this->password),
-       
+
            // $user()->sendEmailVerificationNotification(),
           User::where('id')->update([
             //
@@ -136,7 +136,7 @@ class Registration extends Component
 //  {
 
 //  }
-        
+
         Application::create([
             // 'answers'=>json_encode($answers),
             // 'user_id'=>3,
@@ -144,7 +144,7 @@ class Registration extends Component
             'user_id'=>$user->id,
             'status'=>0
            ]);
-           
+
 
          // dd($answers);
           if (
@@ -163,14 +163,14 @@ class Registration extends Component
         } elseif (
             $answers['monthly_outreach'] === "yes" &&
             $answers['professional'] === "yes" &&
-            
+
                 ($answers['will_support'] === "1k-5k" || $answers['will_support'] === "6k-9k") &&
                 $answers['christian_standard'] === "yes" &&
                 $answers['attended_mission'] === "yes" &&
                 $answers['monthly_support'] === "yes" &&
                 ($answers['currency'] === "NGN" || $answers['currency'] === "USD") &&
                 $answers['monthly_amount'] <= 9999
-            
+
         ) {
             $user->assignRole('outreach');
             $user->member_type_id = 2;
@@ -183,8 +183,8 @@ class Registration extends Component
             $this->successMsg = "Thank you for registering as a Volunteer Member with ALIVE-Nigeria for 2024. Let’s continually raise the banner of Christ higher. Maranatha!";
             $user->update();
         }
-        
-        
+
+
        // dd($answers);
 
         $this->currentStep = 4;
@@ -197,10 +197,10 @@ class Registration extends Component
      */
     public function submitForm()
     {
-     
+
        // session()->flash('success_message',$this->successMsg);
-       
-        
+
+
     }
     /**
      * Write code on Method

@@ -2,20 +2,26 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\EventApplicantsResource\Pages;
-use App\Filament\Resources\EventApplicantsResource\RelationManagers;
-use App\Models\EventApplicants;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use App\Models\EventApplicants;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Toggle;
+use Filament\Forms\Components\Section;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\SelectColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\EventApplicantsResource\Pages;
+use App\Filament\Resources\EventApplicantsResource\RelationManagers;
 
 class EventApplicantsResource extends Resource
 {
+
+
     protected static ?string $model = EventApplicants::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
@@ -24,7 +30,19 @@ class EventApplicantsResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Section::make('Heading')
+                    ->schema([
+                        Select::make('approval_status')
+                        ->options([
+
+                            0 => 'Application Pending',
+                             1 => 'Application Approved',
+                            2 => 'Application Denied',
+                        ])->default(0),
+
+                        Toggle::make('confirm_attendance'),
+                       // Toggle::make('confirm_attendance'),
+                    ]),
             ]);
     }
 
@@ -32,14 +50,17 @@ class EventApplicantsResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('event.name')->searchable()->sortable(),
+
                 TextColumn::make('user.name')->searchable(),
-                TextColumn::make('user.chapter.name')->searchable()->label('Chapter'),
+                TextColumn::make('chapter.name')->searchable()->label('Chapter'),
+                TextColumn::make('event.name')->searchable()->sortable(),
+                TextColumn::make('comments')->searchable()->sortable(),
                 TextColumn::make('amount_paid')->searchable()->label('Total Payment Made')->getStateUsing(function($record){
                     $supplementary_payments= gettype($record->supplementary_payments)=="array"?array_sum(array_column($record->supplementary_payments,'amount_paid')):0;
                     return $supplementary_payments+$record->amount_paid;
                 }),
-                TextColumn::make('event.event_fees')->searchable()->label('Expected Amount')
+                TextColumn::make('event.event_fees')->searchable()->label('Expected Amount'),
+
             ])
             ->filters([
                 //
