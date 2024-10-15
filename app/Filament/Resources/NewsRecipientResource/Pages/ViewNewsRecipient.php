@@ -2,15 +2,16 @@
 
 namespace App\Filament\Resources\NewsRecipientResource\Pages;
 
-use App\Filament\Resources\NewsRecipientResource;
-//use Parallax\FilamentComments\Actions\CommentsAction;
-//use Parallax\FilamentComments\Infolists\Components\CommentsEntry;
-//use Parallax\FilamentComments\Actions\CommentsAction;
-
 use Filament\Actions;
-use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Pages\ViewRecord;
+// use Parallax\FilamentComments\Actions\CommentsAction;
+
+use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\TextEntry;
+use App\Filament\Resources\NewsRecipientResource;
+use Parallax\FilamentComments\Actions\CommentsAction;
+use Parallax\FilamentComments\Infolists\Components\CommentsEntry;
 
 class ViewNewsRecipient extends ViewRecord
 {
@@ -18,27 +19,42 @@ class ViewNewsRecipient extends ViewRecord
 
     protected static ?string $title ='';
 
-   
+
     protected function getHeaderActions(): array
     {
         return [
-           // Actions\EditAction::make()
-        //   CommentsAction::make(),
+
+           Actions\EditAction::make()->visible(function($record){
+        if(auth()->user()->hasRole(['admin'])){
+            return true;
+        }
+        else{
+            return false;
+        }
+           }),
+          CommentsAction::make(),
         ];
     }
-   
+
     public function infolist(Infolist $infolist): Infolist
     {
         $this->record->update(['read'=>1]);
-        
+
         return $infolist
         ->record($this->record)
         ->schema([
-            TextEntry::make('news.title')->label('Title'),
-            TextEntry::make('news.content')->html()->label('Content'),
-           //  CommentsEntry::make('filament_comments'),
-            
-        ])->columns(1);
+           Section::make('Heading')
+            ->description('')
+            ->schema([
+                TextEntry::make('news.title')->label('News title'),
+                TextEntry::make('news.content')->html()->label('News Content')
+                ->columnSpan(2)
+            ]),
+                CommentsEntry::make('filament_comments')
+
+            ])->columns(1);
+
+            // CommentsEntry::make('filament_comments'),
     }
 
 }

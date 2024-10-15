@@ -39,9 +39,10 @@ class UsersPanelProvider extends PanelProvider
         return $panel
             ->id('users')
             ->path('users')
-           
+
             ->login()
-           // ->emailVerification()
+            ->passwordReset()
+             ->emailVerification()
             ->colors([
                 'primary' => Color::Green,
             ])  ->favicon(asset('assets/images/Aliveng.png'))
@@ -53,9 +54,9 @@ class UsersPanelProvider extends PanelProvider
                 FilamentBackgroundsPlugin::make()
                 ->showAttribution(false),
             ])
-          
-          
-          
+
+
+
             ->discoverResources(in: app_path('Filament/Users/Resources'), for: 'App\\Filament\\Users\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Users\\Pages')
             ->pages([
@@ -72,10 +73,10 @@ class UsersPanelProvider extends PanelProvider
             ->resources([
                 NewsRecipientResource::class
             ])
-           
-                       
-           
-          
+
+
+
+
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,

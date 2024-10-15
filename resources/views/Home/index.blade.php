@@ -13,9 +13,9 @@
 								<h1 class="fw-semibold">ALIVE-NIGERIA MEMBERSHIP PORTAL</h1>
 								<p class="text-muted">Our mission is to prepare Africa for the imminent return of Jesus Christ through biblical spiritual training and evangelistic efforts. It is our goal to challenge African Seventh-day Adventist young adults to live a lifestyle of authentic biblical excellence, instill a missionary volunteer spirit in every African Seventh-day Adventist young adult, mobilize and support young adult missionary movements across Africa, create a meaningful impact in neglected areas, and finally change the continent of Africa by ushering in the imminent return of Jesus Christ.</p>
 							</div>
-							{{-- <a href="{{ route('registration') }}" class="button button-large fw-semibold button-rounded ls0 nott ms-0">Register Here</a> --}}
-							<a href="{{ route('membership_standards') }}" target="blank" class="button button-large fw-semibold button-rounded ls0 nott ms-0" >Read Membership Standards here</a>
+							<a href="{{ route('registration') }}" class="button button-large fw-semibold button-rounded ls0 nott ms-0">Register Here</a>
 							<a href="{{ url('users/login') }}" target ="blank" class="button button-large fw-semibold button-rounded ls0 nott ms-0">Sign In</a><br>
+							<a href="{{ route('membership_standards') }}" target="blank" class="button button-large fw-semibold button-rounded ls0 nott ms-0" >Read Membership Standards here</a>
 						</div>
 		<img src="assets/images/welcome2.png" alt="" class="slider-img parallax;"  data-400="margin-top:40px;adeInRight" style="border-radius: 15px; padding-left:60px; width: 500px;">
 					</div>
@@ -39,7 +39,7 @@
 
 					<div class="row justify-content-center col-mb-50 mb-5">
 						<div class="col-md-6 col-lg-4">
-							
+
 							<div class="fslider"  data-direction="horizontal" data-pagi="false" data-arrows="false">
 								<div class="flexslider">
 									<div class="slider-wrap">
@@ -87,7 +87,7 @@
 			</div>
             <br>
             <br>
-		</section> 
-		
+		</section>
+
 		<!-- #content end -->
 @endsection

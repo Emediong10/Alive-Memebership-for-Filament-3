@@ -11,9 +11,13 @@ use Filament\Resources\Resource;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\SelectColumn;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Forms\Components\ToggleButtons;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\EventApplicantsResource\Pages;
 use App\Filament\Resources\EventApplicantsResource\RelationManagers;
@@ -24,7 +28,7 @@ class EventApplicantsResource extends Resource
 
     protected static ?string $model = EventApplicants::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-cloud';
 
     public static function form(Form $form): Form
     {
@@ -32,18 +36,26 @@ class EventApplicantsResource extends Resource
             ->schema([
                 Section::make('Heading')
                     ->schema([
-                        Select::make('approval_status')
-                        ->options([
+                        // Select::make('approval_status')
+                        // ->options([
 
-                            0 => 'Application Pending',
-                             1 => 'Application Approved',
-                            2 => 'Application Denied',
-                        ])->default(0),
+                        //     0 => 'Application Pending',
+                        //      1 => 'Application Approved',
+                        //     2 => 'Application Denied',
+                        // ])->default(0),
 
-                        Toggle::make('confirm_attendance'),
-                       // Toggle::make('confirm_attendance'),
+
+                        Textarea::make('comments'),
+
                     ]),
-            ]);
+
+
+                    // Toggle::make('confirm_attendance'),
+                    ToggleButtons::make('attendance_confirmed')
+                    ->label('Confirm that the member attendend the program')
+                    ->boolean()
+                    ->grouped()
+                            ]);
     }
 
     public static function table(Table $table): Table
@@ -54,7 +66,28 @@ class EventApplicantsResource extends Resource
                 TextColumn::make('user.name')->searchable(),
                 TextColumn::make('chapter.name')->searchable()->label('Chapter'),
                 TextColumn::make('event.name')->searchable()->sortable(),
-                TextColumn::make('comments')->searchable()->sortable(),
+                BadgeColumn::make('approval_status')
+                    ->formatStateUsing(function($record){
+                        if($record->approval_status == true){
+                            return 'Approved';
+                        }
+                        elseif($record->approval_status == false){
+                            return 'Pending';
+                        }
+                    else{
+
+                        return 'Declined';
+                    }
+                    })
+
+
+                    ->colors ([
+                        'primary' => 'Approved',
+                        'warning' => 'Pending',
+                        'danger' => 'Declined',
+                    ]),
+
+
                 TextColumn::make('amount_paid')->searchable()->label('Total Payment Made')->getStateUsing(function($record){
                     $supplementary_payments= gettype($record->supplementary_payments)=="array"?array_sum(array_column($record->supplementary_payments,'amount_paid')):0;
                     return $supplementary_payments+$record->amount_paid;
@@ -66,7 +99,11 @@ class EventApplicantsResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+
+                    Tables\Actions\ViewAction::make(),
+                    // Tables\Actions\EditAction::make(),
+                    // Tables\Actions\DeleteAction::make(),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -88,6 +125,7 @@ class EventApplicantsResource extends Resource
             'index' => Pages\ListEventApplicants::route('/'),
             'create' => Pages\CreateEventApplicants::route('/create'),
             'edit' => Pages\EditEventApplicants::route('/{record}/edit'),
+            'view' => Pages\ViewEventApplicants::route('/{record}/view'),
         ];
     }
 }

@@ -15,7 +15,7 @@
         {{-- {{ dd($licence) }} --}}
         @if ($licence)
             <div style="font-size:22px; font-weight:bold">
-                <h5>Notice! Notice!! Notice!!!</h5>
+                {{-- <h5>{{ $comment }}</h5> --}}
             </div>
             <div class="center" style="font-size:22px; font-weight:bold">
                 <p>If you are not sure of your spiritual gifts, click below to complete the Spiritual Gifts test. Take
@@ -34,6 +34,8 @@
                 <a href="{{ url('users/profile-update') }}">Click Here to update Your Profile</a>
             </div>
         @else
+
+        
         @endif
     @endif
 

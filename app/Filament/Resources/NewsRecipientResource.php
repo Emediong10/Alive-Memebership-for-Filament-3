@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\NewsRecipientResource\Pages;
 use App\Filament\Resources\NewsRecipientResource\RelationManagers;
-//use Parallax\FilamentComments\Tables\Actions\CommentsAction;
+use Parallax\FilamentComments\Tables\Actions\CommentsAction;
 
 use Filament\Forms\Components\Section;
 
@@ -27,7 +27,7 @@ class NewsRecipientResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-ticket';
 
     protected static ?string $navigationGroup = 'News Navigation';
-    
+
     protected static ?string $navigationLabel = 'Inbox';
 
     protected static ?string $slug = 'inbox';
@@ -47,7 +47,7 @@ class NewsRecipientResource extends Resource
                     Select::make('recipients')->options(function(callable $get){
                           $type=$get('recipient_type');
                           if($type==1)
-                          { 
+                          {
                             return User::all()->pluck('name','id');
                           }
                           elseif($type==2)
@@ -65,7 +65,7 @@ class NewsRecipientResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('news.title'),
-                TextColumn::make('created_at')->label('Time Sent')->since()->sortable(), 
+                TextColumn::make('created_at')->label('Time Sent')->since()->sortable(),
 
             ])
             ->recordClasses(function(NewsRecipient $record){
@@ -78,7 +78,7 @@ class NewsRecipientResource extends Resource
                     return "font-bold";
                 }
             }) ->actions([
-               // CommentsAction::make(),
+             CommentsAction::make(),
             ])
             ->filters([
                 //
