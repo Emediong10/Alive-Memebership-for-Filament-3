@@ -33,7 +33,7 @@
 
 	<!-- Document Title
 	============================================= -->
-	<title>Alive Nigeria</title>
+	<title>ALIVE Nigeria</title>
 
 </head>
 
@@ -85,7 +85,7 @@
 								<i class="icon-instagram"></i>
 								<i class="icon-instagram"></i>
 								</a>
-							<a href="https://www.instagram.com/alive.nigeria/"  target="blank"><small style="display: block; margin-top: 3px;"><strong>Follow us</strong><br>on Instagram</small></a> 
+							<a href="https://www.instagram.com/alive.nigeria/"  target="blank"><small style="display: block; margin-top: 3px;"><strong>Follow us</strong><br>on Instagram</small></a>
 							</div>
 
 								<div class="col-6 col-md-12 col-lg-6 clearfix bottommargin-sm">
@@ -94,7 +94,7 @@
 											<i class="icon-youtube"></i>
 								</a>
 							<a href="https://www.youtube.com/user/AlivenigeriaSDA"  target="blank"><small style="display: block; margin-top: 3px;"><strong>Follow and Subscribe to us</strong><br>on Youtube</small></a>
-								
+
 							</div>
 
 						<div class="col-12">
@@ -109,8 +109,8 @@
 						</div>
 							</div>
 						</div>
-							
-						
+
+
 							</div>
 						</div>
 

@@ -53,7 +53,7 @@ class MyDetails extends Page implements HasInfolists
 
         $this->record = User::where('id',auth()->user()->id)->first();
     }
-   
+
     public function infolist(Infolist $infolist): Infolist
     {
         // dd($this->record->id);
@@ -63,7 +63,7 @@ class MyDetails extends Page implements HasInfolists
               Card::make()
               ->icon('heroicon-o-user')
               ->collapsible()
-              ->description('My Profile') 
+              ->description('My Profile')
               ->schema([
               Textentry::make('firstname')
               ->color('success'),
@@ -77,8 +77,8 @@ class MyDetails extends Page implements HasInfolists
               Textentry::make('email')
               ->color('success'),
               Textentry::make('chapter.name')
-              ->color('success'), 
-         
+              ->color('success'),
+
                 Textentry::make('gender')
                 ->color('success'),
                 Textentry::make('dob')
@@ -91,7 +91,7 @@ class MyDetails extends Page implements HasInfolists
                 ->color('success'),
                 Textentry::make('professional_abilities')
                 ->color('success'),
-            
+
                 RepeatableEntry::make('missions')
                 ->schema([
                     TextEntry::make('name')
@@ -118,21 +118,21 @@ class MyDetails extends Page implements HasInfolists
                     ->color('success')
                     ]),
 
-        
+
                 ])->columns(4),
-               
-                
+
+
                            ]);
                      // ->statePath('users')
-                 // ->model(auth()->users()) 
-            
+                 // ->model(auth()->users())
+
     }
     public function clearState(): void {
         $this->state(null);
     }
- 
+
 
 };
 
-    
+
 

@@ -34,8 +34,8 @@
                 <a href="{{ url('users/profile-update') }}">Click Here to update Your Profile</a>
             </div>
         @else
+         
 
-        
         @endif
     @endif
 

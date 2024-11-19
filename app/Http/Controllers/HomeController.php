@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Policy;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -22,14 +23,17 @@ class HomeController extends Controller
         return view('Home.registrations');
     }
 
-    public function eligibility()
-    {
-    return view('Eligibility.form');
-    }
-    
+    // public function eligibility()
+    // {
+    // return view('Eligibility.form');
+    // }
+
     public function membership_standards()
     {
-    return view('Eligibility.membership_policy');
+    return view('Eligibility.membership_policy',[
+
+    'policies' => Policy::where('active',1)->get()->all()
+    ]);
     }
 
 }

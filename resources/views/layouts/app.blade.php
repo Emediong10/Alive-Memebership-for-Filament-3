@@ -9,7 +9,7 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700|Poppins:300,400,500,600,700|PT+Serif:400,400i&display=swap" rel="stylesheet" type="text/css" />
 	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,900&display=swap" rel="stylesheet" type="text/css" />
-	
+
 
 
 
@@ -36,14 +36,14 @@
 
 	<!-- Document Title
 	============================================= -->
-	<title>Alive_form</title>
+	<title>ALIVE Nigeria</title>
 </head>
 <body class="stretched">
 <div id="wrapper" class="clearfix">
 
 		<!-- Top Bar
 		============================================= -->
-		
+
     @yield('body')
 
 </div>
@@ -57,7 +57,7 @@
 	============================================= -->
 	<script src="{{asset('assets/js/functions.js')}}"></script>
     <script src="{{asset('js/step.js')}}"></script>
-	
+
 	<script src="{{ asset ('assets/js/particles/particles.min.js')}}"></script>
 	<script src="{{ asset ('assets/js/particles/particles-line.js')}}"></script><!-- Particles Line -->
 
