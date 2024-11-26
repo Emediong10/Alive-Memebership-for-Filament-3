@@ -5,9 +5,9 @@
 
 						<!-- Logo
 						============================================= -->
-						<div id="logo">
+						{{-- <div id="logo">
 							<a href="{{ url('/') }}" class="standard-logo"><img src="{{ url('assets/images/Aliveng.png') }}" alt="Alive Logo"></a>
-						 </div>
+						 </div> --}}
                          <!-- #logo end -->
 
 

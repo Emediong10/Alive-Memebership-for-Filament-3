@@ -42,7 +42,7 @@
 	<!-- Header
 		============================================= -->
 		{{-- @include('layouts.nav') --}}
-		<br><br>
+		<br><br><br>
 
         @yield('content')
 
@@ -50,12 +50,11 @@
 
 		<!-- Footer
 		============================================= -->
-		{{-- <footer id="footer" class="dark" style="background-color: #0d2706"> --}}
+		<footer id="footer" class="dark" style="background-color: #0d2706">
 
             {{-- @include('layout.footer') --}}
 
-		{{-- </footer> --}}
-        <!-- #footer end -->
+		</footer><!-- #footer end -->
 
 	</div><!-- #wrapper end -->
 

@@ -13,7 +13,7 @@ class Registration extends Component
 
 {
     public $chapters,$user;
-    public $currentStep = 1;
+    public $currentStep = 2;
     public $firstname, $middlename, $lastname, $email,$dob,$gender, $phone, $chapter,$status = 1;
     public $successMsg = '', $monthly_outreach, $outreach, $outreach_experience, $christian_standard, $professional, $attended_mission, $good_standing_adventist;
     public  $will_support, $have_supported, $show_outreach=false, $show_monthly_amount=false, $monthly_support, $monthly_amount, $currency, $password, $confirm_password, $Chapter;
@@ -93,15 +93,17 @@ class Registration extends Component
              $this->validate([
                  'monthly_amount' => 'required',
                 'currency'=>'required',
+                 'password' => 'required|min:8',
+                'confirm_password' => 'required|same:password',
             ]);
         }
-   if($this->monthly_amount >='1000')
-   {
-         $this->validate([
-                'password' => 'required|min:8',
-                'confirm_password' => 'required|same:password'
-         ]);
-             }
+//    if($this->monthly_amount >='1000')
+//    {
+//          $this->validate([
+//                 'password' => 'required|min:8',
+//                 'confirm_password' => 'required|same:password'
+//          ]);
+//              }
 
         $answers=[
             'monthly_outreach'=>$this->monthly_outreach,
@@ -125,7 +127,7 @@ class Registration extends Component
             'chapter_id'=>$this->chapter,
             'password' =>\Hash::make($this->password),
 
-           // $user()->sendEmailVerificationNotification(),
+          
           User::where('id')->update([
             //
         ])

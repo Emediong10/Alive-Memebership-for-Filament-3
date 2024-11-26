@@ -15,20 +15,6 @@ class Dashboard extends Page
     protected static string $view = 'filament.users.pages.dashboard';
 
 
-    // public function form(Form $form): Form
-    // {
-    //     return $form
-    //         ->schema([
-    //             Section::make('Heading')
-    //                 ->schema([
-
-    //                     Textarea::make('comment'),
-
-
-
-    //                         ])
-    //                         ]);
-    // }
 
 
 

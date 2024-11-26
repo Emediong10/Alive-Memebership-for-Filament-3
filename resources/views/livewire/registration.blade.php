@@ -1,3 +1,5 @@
+
+
 <div>
     <div class="container">
         @if(!empty($successMessage))
@@ -27,15 +29,15 @@
                 @endphp
                 @if($currentStep != 4)
                  <div class="stepwizard-step">
-                    <a href="#step_1" type="button" class="btn btn-circle {{ $currentStep != 1 ? 'btn-default' : 'btn-primary' }}"> <span class="fw-bold" style="font-size: 15px">1</span></a>
+                    <a href="#step_1" type="button" class="btn btn-circle {{ $currentStep != 1 ? 'btn-default' : 'btn-success' }}"> <span class="fw-bold" style="font-size: 15px">1</span></a>
                     <p class="text-capitalize">BIO Data</p>
                 </div>
                <div class="stepwizard-step">
-                    <a href="#step_1" type="button" class="btn btn-circle {{ $currentStep != 2 ? 'btn-default' : 'btn-primary' }}"> <span class="fw-bold" style="font-size: 15px">2</span></a>
+                    <a href="#step_1" type="button" class="btn btn-circle {{ $currentStep != 2 ? 'btn-default' : 'btn-success' }}"> <span class="fw-bold" style="font-size: 15px">2</span></a>
                     <p class="text-capitalize">Eligibility Questions</p>
                 </div>
                 <div class="stepwizard-step">
-                    <a href="#step_1" type="button" class="btn btn-circle  {{ $currentStep != 3 ? 'btn-default' : 'btn-primary' }}"> <span class="fw-bold" style="font-size: 15px">3</span></a>
+                    <a href="#step_1" type="button" class="btn btn-circle  {{ $currentStep != 3 ? 'btn-default' : 'btn-success' }}"> <span class="fw-bold" style="font-size: 15px">3</span></a>
                     <p class="text-capitalize">Final submission</p>
                 </div>
                 @endif
@@ -95,10 +97,10 @@
                     </div>
                     <div class="form-group">
                         <label for="detail">Select Your Chapter:</label>
-                        <select name="chapter" class="form-control" wire:model="chapter">
+                        <select name="chapter" class="form-control form-select text-success border-success" wire:model="chapter">
                         <option value="">Select Your Chapter</option>
                           @foreach($chapters as $chpt)
-                          <option value="{{$chpt->id}}">{{$chpt->name}}</option>
+                          <option value="{{$chpt->id}}"><strong>{{$chpt->name}}</strong></option>
                           @endforeach
                         </select>
                         @error('chapter') <span class="error text-danger">{{ $message }}</span> @enderror
@@ -108,9 +110,9 @@
             </div>
 
               <div class="text-right mt-4 mb-5">
-                 <button type="button" class="btn btn-lg btn-primary nextBtn" wire:click="firstStepSubmit">Next</button>
+                 <button type="button" class="btn btn-lg btn-success nextBtn" wire:click="firstStepSubmit">Next</button>
              </div>
-             
+
            </div>
         </div>
 
@@ -142,9 +144,9 @@
                         </div>
                         <div class="form-group">
                             <label> I desire to support ALIVE-Nigeria ministry with at least monthly</label>
-                            <select class="form-select" wire:model="will_support">
+                            <select class="form-control form-select text-success border-success" wire:model="will_support">
                                 <option value="">Select Option</option>
-                                <option value="i don't want to support">I don't want to support AliveNG</option>
+                                <option value="i don't want to support">I don't want to support ALIVE-Nigeria</option>
                                 <option value="1k-5k">1k - 5k</option>
                                 <option value="6k-9k">6k - 9k</option>
                                 <option value="10k">10k above</option>
@@ -178,19 +180,19 @@
 
                 <div class="col-md-12 text-right mb-5 mt-3">
                     <button class="btn btn-danger nextBtn btn-lg pull-right" type="button" wire:click="back(1)">Back</button>
-                    <button class="btn btn-primary nextBtn btn-lg pull-right" type="button" wire:click="secondStepSubmit">Next</button>
+                    <button class="btn btn-success nextBtn btn-lg pull-right" type="button" wire:click="secondStepSubmit">Next</button>
                 </div>
-                 
+
             </div>
         </div>
         <div class="setup-content {{ $currentStep != 3 ? 'displayNone' : '' }}" id="step_3">
             <div class="col-xs-12">
                 <h3 class="text-center mt-5 mb-5">Final submission</h3>
                 <h3>Step 3</h3>
-                <div class="row">
+
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group">
-                            <p>Do you intend to support the ministry of ALIVE Nigeria on a monthly basis?:</p>
+                            <p>Do you intend to support the ministry of ALIVE-Nigeria on a monthly basis?:</p>
                               <label class="radio-inline">
                                 <input type="radio" class="" wire:model.live="monthly_support" value="yes"> Yes
                               </label>
@@ -199,7 +201,10 @@
                               </label> <br>
                               @error('monthly_support') <span class="error text-danger">{{ $message }}</span> @enderror
                         </div>
+                    </div>
              @if($monthly_support == 'yes')
+             <div class="row">
+                <div class="col-md-6 col-sm-12 col-xs-12">
             <div class="form-group">
                 <label for="">Specify Amount you intend to Support Alive Nigeria with</label>
                 <input type="number" placeholder="Specify Amount in Naira" class="form-control" wire:model.live="monthly_amount" required>
@@ -208,41 +213,38 @@
 
             <div class="form-group">
                 <label for="">Currency</label>
-                <select class="form-control" name="currency" wire:model="currency" required>
+                <select class=" form-select text-success border-success" name="currency" wire:model="currency" required>
                     <option value="">Select Currency</option>
                     <option value="NGN">Naira</option>
                     <option value="USD">United States Dollars</option>
                 </select>
                 @error('currency') <span class="error text-danger">{{ $message }}</span> @enderror
             </div>
-            @endif
-            @if($monthly_amount >= '1000')
-                <div class="col-md-6 col-sm-12">
+            {{-- @endif --}}
+        </div>
+            {{-- @if($monthly_amount >= '1000') --}}
+            <div class="col-md-6 col-sm-12 col-xs-12">
                     <div class="form-group">
                         <label for="password">Create Password:</label>
-                        <input type="password" id="password" wire:model="password" class="form-control" placeholder="Create a password">
+                        <input type="password" wire:model="password" class="form-control" placeholder="Create a password">
                         @error('password') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">
                         <label for="password_confirmation">Confirm Password:</label>
-                        <input type="password" id="password_confirm" wire:model="confirm_password" class="form-control" placeholder="Confirm your password">
+                        <input type="password" wire:model="confirm_password" class="form-control" placeholder="Confirm your password">
                         @error('confirm_password') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                 </div>
-           
+
         @endif
 
-                        
-                      </div>
-                    
                 </div>
                 <div class="col-md-12 text-right mb-5 mt-3">
                     <button class="btn btn-danger nextBtn btn-lg pull-right" type="button" wire:click="back(2)">Back</button>
                     <button class="btn btn-success btn-lg pull-right" wire:click="thirdStepSubmit" type="button">Submit!</button>
                 </div>
-          </div>
     </div>
-    
+
     <div class="setup-content {{ $currentStep != 4 ? 'displayNone' : '' }}" id="step_4">
     @if($will_support == '1k-5k' && $monthly_amount <= '1000')
     <div class="text-center mt-5 mb-5">
@@ -252,10 +254,14 @@
     <div class="text-center mt-5 mb-5">
            <a href="{{ url('users/login') }}" class="btn btn-success btn-lg">Proceed To Sign-in</a>
       </div>
-    
+
     @endif
 
 
-    
+
     </div>
+
+
+
+
 </div>
