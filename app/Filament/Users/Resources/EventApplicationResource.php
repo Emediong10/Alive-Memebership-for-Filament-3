@@ -82,7 +82,7 @@ class EventApplicationResource extends Resource
                 //
             ])
             ->actions([
-               
+
                 Action::make('confirm')
                     ->label('Confirm Attendant')
                     ->requiresConfirmation()
@@ -97,7 +97,7 @@ class EventApplicationResource extends Resource
                     ->button()
                     ->visible(function($record){
                         $value = EventApplicants::where([['event_id',$record->id],['user_id',auth()->user()->id]])->first();
-                        if($value->approval_status == true && $value->confirm_attendance == false){
+                        if($value?->approval_status == true && $value->confirm_attendance == false){
                             return true;
                         }
                     }),

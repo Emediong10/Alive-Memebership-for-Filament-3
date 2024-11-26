@@ -9,7 +9,7 @@
     @if (!$user->hasRole('admin'))
         <div>
             <strong>
-                HELLO: {{ $user->name }}
+                Welcome: {{ $user->name }}
             </strong>
         </div>
         {{-- {{ dd($licence) }} --}}
@@ -34,7 +34,24 @@
                 <a href="{{ url('users/profile-update') }}">Click Here to update Your Profile</a>
             </div>
         @else
-         
+
+        <div class="container-fluid pb-video-container">
+            <div class="col-md-10 col-md-offset-1">
+                <h3 class="text-center">Sample Video Gallery</h3>
+                <div class="row pb-row">
+
+                    <div class="col-md-3 pb-video">
+                        <iframe class="pb-video-frame" width="100%" height="230" src="https://www.youtube.com/embed/h3kRIxLruDs?ecver=" frameborder="0" allowfullscreen></iframe>
+                        <label class="form-control label-warning text-center">ALIVE</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
 
         @endif
     @endif
@@ -76,6 +93,33 @@
         .closebtn:hover {
             color: black;
         }
-    </style>
+
+    .pb-video-container {
+        padding-top: 20px;
+        background: #bdc3c7;
+        font-family: Lato;
+    }
+
+    .pb-video {
+        border: 1px solid #e6e6e6;
+        padding: 5px;
+    }
+
+        .pb-video:hover {
+            background: #2c3e50;
+        }
+
+    .pb-video-frame {
+        transition: width 2s, height 2s;
+    }
+
+        .pb-video-frame:hover {
+            height: 300px;
+        }
+
+    .pb-row {
+        margin-bottom: 10px;
+    }
+</style>
 
 </x-filament-panels::page>

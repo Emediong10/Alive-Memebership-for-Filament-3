@@ -45,9 +45,7 @@ class Registration extends Component
             'gender' => 'required',
             'chapter' => 'required',
             'email'=>'required|email|unique:users,email',
-           // 'phone'=>'required|unique:users,phone',
          ]);
-        //  dd($this->phone);
 
 
         // $this->successMsg = "Saved";
@@ -158,7 +156,7 @@ class Registration extends Component
         ) {
             $user->assignRole('financial');
             $user->member_type_id = 1;
-            $this->successMsg = "Thank you for registering as a Financial Member with ALIVE-Nigeria for 2024. Let’s continually raise the banner of Christ higher. Maranatha!";
+            $this->successMsg = "Thank you for registering as a Financial Member with ALIVE-Nigeria for 2025. Let’s continually raise the banner of Christ higher. Maranatha!";
             $user->update();
         } elseif (
             $answers['monthly_outreach'] === "yes" &&
@@ -174,13 +172,13 @@ class Registration extends Component
         ) {
             $user->assignRole('outreach');
             $user->member_type_id = 2;
-            $this->successMsg = "Thank you for registering as an Outreach Member with ALIVE-Nigeria for 2024. Let’s continually raise the banner of Christ higher. Maranatha!";
+            $this->successMsg = "Thank you for registering as an Outreach Member with ALIVE-Nigeria for 2025. Let’s continually raise the banner of Christ higher. Maranatha!";
             $user->update();
         }
          else {
             $user->assignRole('volunteer');
             $user->member_type_id = 3;
-            $this->successMsg = "Thank you for registering as a Volunteer Member with ALIVE-Nigeria for 2024. Let’s continually raise the banner of Christ higher. Maranatha!";
+            $this->successMsg = "Thank you for registering as a Volunteer Member with ALIVE-Nigeria for 2025. Let’s continually raise the banner of Christ higher. Maranatha!";
             $user->update();
         }
 
@@ -210,9 +208,6 @@ class Registration extends Component
         $this->currentStep = $step;
     }
 
-    /**
-     * Write code on Method
-     */
     public function clearForm()
     {
 

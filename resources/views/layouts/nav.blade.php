@@ -7,10 +7,11 @@
 						============================================= -->
 						<div id="logo">
 							<a href="{{ url('/') }}" class="standard-logo"><img src="{{ url('assets/images/Aliveng.png') }}" alt="Alive Logo"></a>
-						 </div><!-- #logo end -->
+						 </div>
+                         <!-- #logo end -->
 
 
-						
+
 
 						<!-- Primary Navigation
 						============================================= -->
@@ -18,7 +19,7 @@
 
 
 						</nav><!-- #primary-menu end -->
-{{-- 
+{{--
 						<form class="top-search-form" action="search.html" method="get">
 							<input type="text" name="q" class="form-control" value="" placeholder="Type &amp; Hit Enter.." autocomplete="off">
 						</form> --}}
