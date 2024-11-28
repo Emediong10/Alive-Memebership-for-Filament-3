@@ -41,7 +41,10 @@
                 <div class="row pb-row">
 
                     <div class="col-md-3 pb-video">
-                        <iframe class="pb-video-frame" width="100%" height="230" src="https://www.youtube.com/embed/h3kRIxLruDs?ecver=" frameborder="0" allowfullscreen></iframe>
+                        {{-- <iframe class="pb-video-frame" width="100%" height="230" src="https://www.youtube.com/live/cjQdhNTYf1I?si=GwseicGI_WVjiZNP" frameborder="3" allowfullscreen></iframe> --}}
+
+                        <iframe class="pb-video-frame" width="100%" height="230" src="https://www.youtube.com/embed/R5iAy7FQuNo?si=HTIUZCfhljMtuIg1" frameborder="50" allowfullscreen></iframe>
+
                         <label class="form-control label-warning text-center">ALIVE</label>
                     </div>
                 </div>

@@ -42,7 +42,7 @@ class UsersPanelProvider extends PanelProvider
 
             ->login()
             ->passwordReset()
-             ->emailVerification()
+            //  ->emailVerification()
             ->colors([
                 'primary' => Color::Green,
             ])  ->favicon(asset('assets/images/Aliveng.png'))
@@ -54,7 +54,8 @@ class UsersPanelProvider extends PanelProvider
                 FilamentBackgroundsPlugin::make()
                 ->showAttribution(false),
             ])
-
+            // ->databaseNotifications()
+            // ->databaseNotificationsPolling('30s')
 
 
             ->discoverResources(in: app_path('Filament/Users/Resources'), for: 'App\\Filament\\Users\\Resources')

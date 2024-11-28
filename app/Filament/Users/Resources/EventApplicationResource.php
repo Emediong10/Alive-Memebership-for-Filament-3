@@ -33,7 +33,7 @@ class EventApplicationResource extends Resource
         return  true;
     }
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-identification';
 
     protected static ?string $title = 'Event Application';
 

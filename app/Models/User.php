@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use Filament\Panel;
 use App\Models\Chapter;
+use App\Models\Payment;
 use App\Models\MemberType;
 use Laravel\Sanctum\HasApiTokens;
 use Filament\Models\Contracts\HasName;
@@ -10,10 +12,9 @@ use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+//use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-//use Filament\Models\Contracts\FilamentUser;
-use Filament\Panel;
 
 //use Illuminate\Foundation\Auth\User as Authenticatable;
 //use Illuminate\Notifications\Notifiable;
@@ -86,7 +87,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsTo(Chapter::class);
     }
-   
+
     public function member_type()
     {
         return $this->belongsTo(MemberType::class);
@@ -96,7 +97,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
        return $this->belongsToMany(Mission::class);
     }
-    
+
     public function area_interests()
     {
     return $this->belongsToMany(AreaInterest::class);
@@ -110,18 +111,22 @@ class User extends Authenticatable implements MustVerifyEmail
     {
     return $this->belongsToMany(SpiritualGift::class);
     }
+    public function payment()
+    {
+    return $this->hasOne(Payment::class);
+    }
 
-   
-    
 
-    
+
+
+
 
 // class User extends Authenticatable implements FilamentUser
 // {
 //     // ...
 
     // public function canAccessPanel(Panel $panel): bool
-   
+
     // {
     //   // Assuming you have a column 'role' in your 'users' table
     //     // to differentiate between administrators and regular users
