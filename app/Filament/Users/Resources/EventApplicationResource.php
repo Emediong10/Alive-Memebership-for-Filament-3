@@ -3,6 +3,7 @@
 namespace App\Filament\Users\Resources;
 
 use Filament\Tables;
+use App\Models\Payment;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use App\Models\EventApplicants;
@@ -63,7 +64,9 @@ class EventApplicationResource extends Resource
                 TextColumn::make('event_fees')->label('Fees')->getStateUsing(function ($record) {
                     return $record->event_fees.' '.$record->event_fees_currency;
                 }),
-                TextColumn::make('')->label('Status')->getStateUsing(function ($record) {
+                TextColumn::make('status')
+                ->label('Status')
+                ->getStateUsing(function ($record) {
                     $event_id = $record->id;
                     $applicant_id = auth()->user()->id;
                     $event = EventApplicants::where(['event_id' => $event_id, 'user_id' => $applicant_id])->first();
@@ -76,118 +79,226 @@ class EventApplicationResource extends Resource
                             return 'Application Denied';
                         }
                     }
-                })->sortable(),
+                })
+                ->badge() // Enable badges for the column
+                ->color(function ($state) {
+                    // Assign colors based on the state
+                    return match ($state) {
+                        'Application Pending' => 'warning',
+                        'Application Approved' => 'success',
+                        'Application Denied' => 'danger',
+                        default => 'secondary',
+                    };
+                })
+                ->icon(function ($state) {
+                    // Assign icons based on the state
+                    return match ($state) {
+                        'Application Pending' => 'heroicon-o-clock',
+                        'Application Approved' => 'heroicon-o-check-circle',
+                        'Application Denied' => 'heroicon-o-x-circle',
+                        default => null,
+                    };
+                })
+            
+               ->sortable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
 
-                Action::make('confirm')
-                    ->label('Confirm Attendant')
-                    ->requiresConfirmation()
-                    ->modalSubHeading('Are you sure you attended the event?')
-                    ->modalSubmitActionLabel('Yes, i attended')
-                    ->action(function($record){
-                        $user = EventApplicants::where([['event_id',$record->id],['user_id',auth()->user()->id],['approval_status',true]])->first();
-                        $user->confirm_attendance = true;
-                        $user->update();
-
-                    })
-                    ->button()
-                    ->visible(function($record){
-                        $value = EventApplicants::where([['event_id',$record->id],['user_id',auth()->user()->id]])->first();
-                        if($value?->approval_status == true && $value->confirm_attendance == false){
-                            return true;
-                        }
-                    }),
-                Action::make('Apply')->action(function ($record, $data) {
+                Action::make('Apply')
+                ->action(function ($record, $data) {
                     EventApplicants::create([
                         'event_id' => $record->id,
                         'user_id' => auth()->user()->id,
                         'approval_status' => 0,
                         'comments' => $data['comments'],
                         'confirm_attendance' => 0,
-                         'attendance_confirmed' => 0,
+                        'attendance_confirmed' => 0,
                     ]);
                     Notification::make()->title('Application made Successfully')->send()->success();
-                })->requiresConfirmation()->form([
+                })
+                ->requiresConfirmation()
+                ->form([
                     Textarea::make('comments'),
-                ])->visible(
-                    function ($record) {
-                        $event_id = $record->id;
-                        $applicant_id = auth()->user()->id;
-                        $event_exists = EventApplicants::where(['event_id' => $event_id, 'user_id' => $applicant_id])->first();
-                        if ($event_exists) {
-                            return false;
+                ])
+                ->visible(function ($record) {
+                    $event_id = $record->id;
+                    $applicant_id = auth()->user()->id;
+                    return !EventApplicants::where(['event_id' => $event_id, 'user_id' => $applicant_id])->exists();
+                }),
+
+                Action::make('decline_reason')
+                ->icon('heroicon-o-eye')
+                ->color('danger')
+                ->action(function ($record) {
+                    $eventApplicant = EventApplicants::where([
+                        ['event_id', $record->id],
+                        ['user_id', auth()->user()->id],
+                    ])->first();
+            
+                    if ($eventApplicant && $eventApplicant->approval_status === 2) {
+                        $declineReason = $eventApplicant->decline_reason ?? 'No reason provided';
+                        Notification::make()
+                            ->title('Payment Declined')
+                            ->body($declineReason)
+                            ->danger()
+                            ->send();
+                    } else {
+                        Notification::make()
+                            ->title('No Decline Information Found')
+                            ->danger()
+                            ->send();
+                    }
+                })
+                ->visible(function ($record) {
+                    // Make the action visible only if the profile's approval status is 2 (denied)
+                    $eventApplicant = EventApplicants::where([
+                        ['event_id', $record->id],
+                        ['user_id', auth()->user()->id],
+                    ])->first();
+            
+                    return $eventApplicant && $eventApplicant->approval_status === 2;
+                }),
+
+
+                            Action::make('Restart Application')
+                ->icon('heroicon-o-arrow-path')
+                ->color('primary')
+                ->requiresConfirmation()
+                ->modalHeading('Restart Application')
+                ->modalSubheading('Are you sure you want to restart your application? This will reset the application and payment data.')
+                ->modalButton('Restart')
+                ->action(function ($record) {
+                    $eventApplicant = EventApplicants::where([
+                        ['event_id', $record->id],
+                        ['user_id', auth()->user()->id],
+                    ])->first();
+
+                    if ($eventApplicant) {
+                        // Reset the application details
+                        $eventApplicant->update([
+                            'approval_status' => 0, // Reset to pending
+                            'decline_reason' => null, // Clear decline reason
+                            'transaction_reference' => null, // Clear any payment data
+                            'payment_evidence' => null, // Clear payment evidence
+                        ]);
+
+                        Notification::make()
+                            ->title('Application Restarted Successfully')
+                            ->success()
+                            ->send();
+                    } else {
+                        Notification::make()
+                            ->title('No Application Record Found')
+                            ->danger()
+                            ->send();
+                    }
+                })
+                ->visible(function ($record) {
+                    $eventApplicant = EventApplicants::where([
+                        ['event_id', $record->id],
+                        ['user_id', auth()->user()->id],
+                    ])->first();
+
+                    // Make button visible only if the application is denied
+                    return $eventApplicant && $eventApplicant->approval_status === 2;
+                }),
+
+            
+            
+                Action::make('Payment')
+                ->icon('heroicon-o-credit-card')
+                ->action(function ($record, $data) {
+                    $eventApplicant = EventApplicants::where([
+                        ['event_id', $record->id],
+                        ['user_id', auth()->user()->id],
+                    ])->first();
+            
+                    if ($eventApplicant) {
+                        if ($data['payment_choice'] === 'existing') {
+                            $eventApplicant->update([
+                                'transaction_reference' => $data['transaction_reference'],
+                                'payment_evidence' => $data['payment_evidence'],
+                            ]);
+                            Notification::make()->title('Payment Details Updated Successfully')->send()->success();
+                        } else {
+                            try {
+                                $paystack = new \Unicodeveloper\Paystack\Paystack();
+                                $user = auth()->user();
+            
+                                $transactionData = [
+                                    'amount' => $record->event_fees * 100, // Amount in kobo (multiply by 100)
+                                    'email' => $user->email,
+                                    'metadata' => [
+                                        'user_id' => $user->id,
+                                        'description' => 'Payment for Event #' . $record->id,
+                                    ],
+                                ];
+            
+                                $response = $paystack->getAuthorizationUrl($transactionData)->redirectNow();
+            
+                                return $response;
+                            } catch (\Exception $e) {
+                                Notification::make()
+                                    ->title('Failed to initiate payment: ' . $e->getMessage())
+                                    ->danger()
+                                    ->send();
+                            }
                         }
-
-                        return true;
+                    } else {
+                        Notification::make()->title('No Event Applicant Record Found')->send()->danger();
                     }
-                ),
-                Action::make('Pay')->action(function($record, $data){
-                    $event_id=$record->id;
-                    $applicant_id=auth()->user()->id;
-                    $event=EventApplicants::where(['event_id'=>$event_id,'user_id'=>$applicant_id])->first();
-                    $supplementary_payments = isset($event->supplementary_payments) ? array_sum(array_column($event->supplementary_payments, 'amount_paid')) : 0;
-
-                    // $supplementary_payments = dd($event->supplementary_payments);
-                    $amount_paid = $event->amount_paid+$supplementary_payments;
-                    //dd($amount_paid);
-                    if($event &&( $event->amount_paid == null || $event->amount_paid== 0)){
-                        $event->update([
-                            'transaction_reference'=>$data['transaction_reference'],
-                            'amount_paid'=>$data['amount_paid'],
-                            'payment_method'=>$data['payment_method'],
-                            'payment_evidence'=>$data['payment_evidence'],
-                        ]);
-                        Notification::make()->title('Payment Details updated')->send()->success();
-                    }
-                    elseif($event && $amount_paid > 0 && $amount_paid < $event->event->event_fees){
-                        $supplementary_payment_data = $event->supplementary_payments ?: [];
-                        array_push($supplementary_payment_data,[
-                            'transaction_reference'=>$data['transaction_reference'],
-                            'amount_paid'=>$data['amount_paid'],
-                            'payment_method'=>$data['payment_method'],
-                            'payment_evidence'=>$data['payment_evidence'],
-                        ]);
-                        $event->update([
-                        'supplementary_payments'=>$supplementary_payment_data,
-                        ]);
-                        Notification::make()->title('Payment Details updated')->send()->success();
-                    }
-
-
-
-                })->visible(function($record){
-                    $event_id=$record->id;
-                    $applicant_id=auth()->user()->id;
-                    $event_exists=EventApplicants::where(['event_id'=>$event_id,'user_id'=>$applicant_id])->first();
-                    $supplementary_payment_data = isset($event_exists->supplementary_payments) && !empty($event_exists->supplementary_payments)? $event_exists->supplementary_payments : 0;
-                    $supplementary_payments = gettype($supplementary_payment_data)=="array"?array_sum(array_column($supplementary_payment_data,'amount_paid')):0;
-                   $amount_paid = isset($event_exists) && isset($event_exists->amount_paid)
-                    ? $event_exists->amount_paid + $supplementary_payments : $supplementary_payments;
-
-                    if($event_exists && $event_exists->event->is_paid_event==true && (int)$amount_paid<(int)$event_exists->event->event_fees && $event_exists->approval_status!=2){
-                        return true;
-                    }
-                    elseif($event_exists && (int)$amount_paid>=(int)$event_exists->event->event_fees){
-
-                        return false;
-                    }
-
-                    return false;
-                })->form([
-                       TextInput::make('transaction_reference')->helperText('Code For Referencing transaction')->hint('This could be the transaction reference number generated after transfer or the bank teller number on a bank deposit slip')->required(),
-                       TextInput::make('amount_paid')->required()->numeric(),
-                       Select::make('payment_method')->options([
-                        'Transfer'=>'Transfer',
-                        'Bank Deposit'=>'Bank Deposit',
-                       ])->required(),
-                       FileUpload::make('payment_evidence')->directory('images/payment_evidence')->required(),
+                })
+                ->form([
+                    Select::make('payment_choice')
+                        ->options([
+                            'existing' => 'Have you already paid?',
+                            'new' => 'Proceed with Payment',
+                        ])
+                        ->reactive()
+                        ->required(),
+                    TextInput::make('amount_paid')
+                        ->label('Amount paid')
+                        ->required(),
+                    TextInput::make('transaction_reference')
+                        ->label('Transaction Reference')
+                        ->required()
+                        ->visible(fn($get) => $get('payment_choice') === 'existing'),
+                    FileUpload::make('payment_evidence')
+                        ->label('Payment Evidence')
+                        ->directory('images/payment_evidence')
+                        ->required()
+                        ->visible(fn($get) => $get('payment_choice') === 'existing'),
                 ])
-                ])
+                ->modalHeading('Payment')
+                ->modalIcon('heroicon-o-credit-card')
+                ->modalButton('Submit')
+                ->requiresConfirmation()
+                ->visible(function ($record) {
+                    // Get the applicant's event application record
+                    $applicant_id = auth()->user()->id;
+                    $eventApplicant = EventApplicants::where([
+                        ['event_id', $record->id],
+                        ['user_id', $applicant_id],
+                    ])->first();
+            
+                    // Check if event_fees is null or zero
+                    if (is_null($record->event_fees) || $record->event_fees == 0) {
+                        return false; // Disable button if event_fees is null or zero
+                    }
+            
+                    // Check if the application status is approved
+                    if ($eventApplicant && $eventApplicant->approval_status === 1) {
+                        return false; // Disable button if the application is approved
+                    }
+            
+                    return true; // Otherwise, show payment button
+                }),
+            
 
+            ])
         //
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -196,12 +307,32 @@ class EventApplicationResource extends Resource
             ]);
     }
 
-    public static function getRelations(): array
+    public static function processPaystackPayment(array $data)
     {
-        return [
-            //
-        ];
+        try {
+            $paystack = new \Unicodeveloper\Paystack\Paystack();
+            $user = auth()->user();
+    
+            $transactionData = [
+                'amount' => $data['amount'] * 100, // Amount in kobo
+                'email' => $user->email,
+                'metadata' => [
+                    'user_id' => $user->id,
+                    'description' => $data['description'],
+                ],
+            ];
+    
+            // Generate authorization URL
+            $response = $paystack->getAuthorizationUrl($transactionData)->redirectNow();
+    
+            return $response;
+        } catch (\Exception $e) {
+            // Handle API errors or exceptions
+            return redirect()->back()->with('error', 'Failed to initiate payment: ' . $e->getMessage());
+        }
     }
+    
+    
 
     public static function getPages(): array
     {

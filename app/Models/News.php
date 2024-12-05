@@ -9,9 +9,13 @@ class News extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'title','content','slug','active'
-    ];
+    public $incrementing = true;
+
+    protected $guarded =[];
+
+    // protected $fillable = [
+    //     'title','content','slug','active'
+    // ];
 
     public function recipient()
     {

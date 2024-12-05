@@ -37,24 +37,31 @@ class EventResource extends Resource
             ->schema([
                 Section::make('')->schema([
                     Select::make('event_type_id')->relationship('event_type','name')->required()->preload()->searchable(),
-                    TextInput::make('name')->required(),
-                    DatePicker::make('start_date')->required(),
-                    DatePicker::make('end_date')->required(),
-                    TextInput::make('venue'),
-                    Toggle::make('is_paid_event')->live(),
-                    TextInput::make('event_fees')->visible(function(Get $get){
-                         if($get('is_paid_event')==true)
-                         {
-                            return true;
-                         }
-                         return false;
-                    })->numeric()->required(function(Get $get){
-                        if($get('is_paid_event')==true)
-                        {
-                           return true;
-                        }
-                        return false;
-                   }),
+                    TextInput::make('name')
+                    ->required(),
+                    DatePicker::make('start_date')
+                    ->required(),
+                    DatePicker::make('end_date')
+                    ->required(),
+                    TextInput::make('venue')
+                    ->required(),
+                    Toggle::make('is_paid_event')
+                    ->live(),
+                   TextInput::make('event_fees')
+                   ->placeholder('please remember to use  .00 for kobo')
+                        ->visible(function (Get $get) {
+                            return $get('is_paid_event') == true;
+                        })
+                        ->numeric()
+                        ->prefix('₦') // Add the Naira symbol as a prefix
+                        ->required(function (Get $get) {
+                            return $get('is_paid_event') == true;
+                        })
+                        ->reactive() // Make the field dynamically updateable if needed
+                        ->afterStateUpdated(function ($state, $set) {
+                            // Ensure that the value entered is a valid numeric amount
+                            $set('event_fees', (float) $state);
+                        }),
                    Select::make('event_fees_currency')->options([
                       'USD'=>'USD',
                       'NGN'=>'NGN'
@@ -71,8 +78,8 @@ class EventResource extends Resource
                         }
                         return false;
                    }),
-                   RichEditor::make('description'),
-                   FileUpload::make('event_flyer')->image()->directory('images/event_flyer'),
+                   RichEditor::make('description') ->required(),
+                   FileUpload::make('event_flyer')->image()->directory('images/event_flyer') ->required(),
                    Toggle::make('active'),
                 ])
             ]);

@@ -15,6 +15,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\BadgeColumn;
+use Filament\Forms\Components\FileUpload;
 use Filament\Tables\Columns\SelectColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Filament\Forms\Components\ToggleButtons;
@@ -34,28 +35,30 @@ class EventApplicantsResource extends Resource
     {
         return $form
             ->schema([
-                Section::make('Heading')
+                Section::make('')
                     ->schema([
-                        // Select::make('approval_status')
-                        // ->options([
-
-                        //     0 => 'Application Pending',
-                        //      1 => 'Application Approved',
-                        //     2 => 'Application Denied',
-                        // ])->default(0),
-
-
+                Section::make('Heading')
+                    ->description('')
+                    ->schema([
+                        TextInput::make('transaction_reference'),
+                        TextInput::make('amount'),
                         Textarea::make('comments'),
+                        FileUpload::make('payment_evidence')
+                        ->label('Payment Evidence')
+                        ->downloadable()
+                        ->directory('images/payment_evidence'),
+                    ])
+                    ->columns(2),
 
                     ]),
 
 
                     // Toggle::make('confirm_attendance'),
-                    ToggleButtons::make('attendance_confirmed')
-                    ->label('Confirm that the member attendend the program')
-                    ->boolean()
-                    ->grouped()
-                            ]);
+                    // ToggleButtons::make('attendance_confirmed')
+                    // ->label('Confirm that the member attendend the program')
+                    // ->boolean()
+                    // ->grouped()
+                          ]);
     }
 
     public static function table(Table $table): Table
@@ -66,28 +69,18 @@ class EventApplicantsResource extends Resource
                 TextColumn::make('user.name')->searchable(),
                 TextColumn::make('chapter.name')->searchable()->label('Chapter'),
                 TextColumn::make('event.name')->searchable()->sortable(),
-                BadgeColumn::make('approval_status')
-                    ->formatStateUsing(function($record){
-                        if($record->approval_status == true){
-                            return 'Approved';
-                        }
-                        elseif($record->approval_status == false){
-                            return 'Pending';
-                        }
-                    else{
-
-                        return 'Declined';
+                TextColumn::make('approval_status')
+                ->formatStateUsing(function ($record) {
+                    if ($record->approval_status == 1) {
+                        return '<span style="color: green;"><x-heroicon-o-check-circle class="w-5 h-5 inline" /> Approved</span>';
+                    } elseif ($record->approval_status == 0) {
+                        return '<span style="color: orange;"><x-heroicon-o-clock class="w-5 h-5 inline" /> Pending</span>';
+                    } else {
+                        return '<span style="color: red;"><x-heroicon-o-x-circle class="w-5 h-5 inline" /> Declined</span>';
                     }
-                    })
-
-
-                    ->colors ([
-                        'primary' => 'Approved',
-                        'warning' => 'Pending',
-                        'danger' => 'Declined',
-                    ]),
-
-
+                })
+                ->html(), // Places the icon before the text.
+            
                 TextColumn::make('amount_paid')->searchable()->label('Total Payment Made')->getStateUsing(function($record){
                     $supplementary_payments= gettype($record->supplementary_payments)=="array"?array_sum(array_column($record->supplementary_payments,'amount_paid')):0;
                     return $supplementary_payments+$record->amount_paid;
