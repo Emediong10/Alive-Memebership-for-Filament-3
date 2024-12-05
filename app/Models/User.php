@@ -12,14 +12,14 @@ use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-//use Filament\Models\Contracts\FilamentUser;
+// use Filament\Models\Contracts\FilamentUser;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 //use Illuminate\Foundation\Auth\User as Authenticatable;
 //use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable implements MustVerifyEmail, FilamentUser
 
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles, Notifiable;
@@ -118,27 +118,14 @@ class User extends Authenticatable implements MustVerifyEmail
 
 
 
+    public function canAccessPanel(Panel $panel): bool
+    {
+        if ($panel->getId() === 'admin') {
+            return str_ends_with($this->email, 'admin@example.com');
+        }
+ 
+        return true;
+    }
 
-
-
-// class User extends Authenticatable implements FilamentUser
-// {
-//     // ...
-
-    // public function canAccessPanel(Panel $panel): bool
-
-    // {
-    //   // Assuming you have a column 'role' in your 'users' table
-    //     // to differentiate between administrators and regular users
-    //     if($this->is_admin) {
-    //         // Admins can access the panel
-    //         return true;
-    //     }
-
-    //     // Regular users can only access the panel for regular users
-    //     return $panel->getName() === 'users';
-    // }
-
-// }
 
 }

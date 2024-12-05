@@ -46,7 +46,7 @@ class EventApplicationResource extends Resource
         return $form
             ->schema([
 
-            // Toggle::make('confirmconfirm_attendance')->label('Did you attend the Event??')
+          Textarea::make('description'),
             ]);
     }
 
@@ -106,7 +106,7 @@ class EventApplicationResource extends Resource
                 //
             ])
             ->actions([
-
+                // Tables\Actions\ViewAction::make(),
                 Action::make('Apply')
                 ->action(function ($record, $data) {
                     EventApplicants::create([
@@ -302,7 +302,7 @@ class EventApplicationResource extends Resource
         //
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                    // Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }
@@ -338,7 +338,8 @@ class EventApplicationResource extends Resource
     {
         return [
             'index' => Pages\ListEventApplications::route('/'),
-            'create' => Pages\CreateEventApplication::route('/create'),
+            // 'create' => Pages\CreateEventApplication::route('/create'),
+            'view' => Pages\CreateEventApplication::route('/view'),
            // 'edit' => Pages\EditEventApplication::route('/{record}/edit'),
         ];
     }

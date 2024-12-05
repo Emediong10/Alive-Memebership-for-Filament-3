@@ -26,6 +26,7 @@ class ListEventApplications extends ListRecords
                     return false;
                 }
             }),
+            //  Actions\DeleteAction::make(),
         ];
     }
 
