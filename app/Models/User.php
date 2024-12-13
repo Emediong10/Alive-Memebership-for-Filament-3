@@ -5,6 +5,7 @@ namespace App\Models;
 use Filament\Panel;
 use App\Models\Chapter;
 use App\Models\Payment;
+use App\Models\CommentReply;
 use App\Models\MemberType;
 use Laravel\Sanctum\HasApiTokens;
 use Filament\Models\Contracts\HasName;
@@ -116,16 +117,20 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser
     return $this->hasOne(Payment::class);
     }
 
-
-
-    public function canAccessPanel(Panel $panel): bool
+    public function replies()
     {
-        if ($panel->getId() === 'admin') {
-            return str_ends_with($this->email, 'admin@example.com');
-        }
- 
-        return true;
+        return $this->hasMany(CommentReply::class);
     }
+
+   public function canAccessPanel(Panel $panel): bool
+{
+    if ($panel->getId() === 'web-admin') {
+        return $this->email === 'admin@example.com';
+    }
+
+    return true;
+}
+
 
 
 }

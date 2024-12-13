@@ -65,9 +65,10 @@ class PaymentResource extends Resource
             ->columns([
 
             TextColumn::make('user.name')
-            ->label('Your Name') 
+            ->label('Your Name')
             ->icon('heroicon-m-user')
             ->iconColor('success'),
+            
             TextColumn::make('user.email')
             ->label('Your Email') 
             ->searchable()
@@ -88,7 +89,7 @@ class PaymentResource extends Resource
                 ->getStateUsing(function ($record) {
                     $payment = Payment::where('user_id', auth()->id())->first();
                     if ($payment) {
-                        return '₦' . number_format($payment->amount / 100, 0);
+                       return '₦' . number_format($record->amount / 100, 2);
                     }
                     return null;
                 }),
@@ -97,10 +98,11 @@ class PaymentResource extends Resource
                 ->label('Payment Description')
                 ->searchable()
                 ->sortable()
-                ->getStateUsing(function ($record) {
-                    $payment = Payment::where('user_id', auth()->id())->first();
-                    return $payment ? $payment->description : null;
-                }),
+                // ->getStateUsing(function ($record) {
+                //     $payment = Payment::where('user_id', auth()->id())->first();
+                //     return $payment ? $payment->description : null;
+                // })
+                ,
 
             TextColumn::make('trans_reference')
                 ->label('Transaction Reference')
@@ -110,16 +112,16 @@ class PaymentResource extends Resource
                  ->icon('heroicon-m-clipboard')
                  ->iconColor('success')
                  ->copyMessage('Transaction Reference copied')
-                 ->copyMessageDuration(1500)
-                ->getStateUsing(function ($record) {
-                    $payment = Payment::where('user_id', auth()->id())->first();
-                    return $payment ? $payment->trans_reference : null;
-                }),
+                 ->copyMessageDuration(1500),
+                // ->getStateUsing(function ($record) {
+                //   $payment = Payment::where('user_id', auth()->id())->first();
+                //     return  $payment->trans_reference;
+                // }),
 
-            // TextColumn::make('metadata')
-            //     ->label('Metadata Reference')
-            //     ->searchable()
-            //     ->sortable()
+            TextColumn::make('payment_type')
+                ->label('Payment type')
+                ->searchable()
+                ->sortable(),
             //     ->getStateUsing(function ($record) {
             //         $payment = Payment::where('user_id', auth()->id())->first();
             //         return $payment ? $payment->metadata : null;
@@ -129,10 +131,10 @@ class PaymentResource extends Resource
                 ->label('Payment Status')
                 ->searchable()
                 ->sortable()
-                ->getStateUsing(function ($record) {
-                    $payment = Payment::where('user_id', auth()->id())->first();
-                    return $payment ? $payment->trans_status : null;
-                })
+                // ->getStateUsing(function ($record) {
+                //     $payment = Payment::where('user_id', auth()->id())->first();
+                //     return $payment ? $payment->trans_status : null;
+                // })
                 ->sortable()
                 ->formatStateUsing(function ($state) {
                     return $state === 'success' ? 'Successful Transaction' : 'Failed Transaction';
@@ -158,10 +160,10 @@ class PaymentResource extends Resource
                 ->searchable()
                 ->sortable()
                 ->dateTime('l M j, Y: h:i:A')
-                ->getStateUsing(function ($record) {
-                    $payment = Payment::where('user_id', auth()->id())->first();
-                    return $payment ? $payment->created_at : null;
-                }),
+                // ->getStateUsing(function ($record) {
+                //     $payment = Payment::where('user_id', auth()->id())->first();
+                //     return $payment ? $payment->created_at : null;
+                // }),
 
             ])
             ->filters([

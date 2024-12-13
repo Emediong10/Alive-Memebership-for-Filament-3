@@ -45,6 +45,8 @@ class PaymentResource extends Resource
                 TextInput::make('trans_reference'),
                 TextInput::make('trans_status'),
                 TextInput::make('description'),
+                TextInput::make('currency'),
+                TextInput::make('payment_type'),
                 TextInput::make('created_at')
                 ->label('Created At')
                 ->readOnly()
@@ -60,11 +62,21 @@ class PaymentResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('user.name')
+                TextColumn::make('user.firstname')
+                ->label('firstname')
+                 ->searchable()
+                ->sortable() 
+                ->icon('heroicon-m-user')
+                 ->iconColor('success'),
+                
+                TextColumn::make('user.lastname')
+                   ->label('lastname')
                  ->searchable()
                 ->sortable(),
+                
                 TextColumn::make('user.email') 
                 ->searchable()
+                ->label('Email')
                 ->sortable()
                  ->copyable()
                  ->copyMessage('email copied')
@@ -84,11 +96,25 @@ class PaymentResource extends Resource
                 }),
                 TextColumn::make('trans_reference') 
                 ->searchable()
-                ->sortable()->searchable()
+                ->searchable()
                 ->sortable()
                  ->copyable()
-                 ->copyMessage('transaction Reference copied')
+                 ->icon('heroicon-m-clipboard')
+                 ->iconColor('success')
+                 ->copyMessage('Transaction Reference copied')
                  ->copyMessageDuration(1500),
+                 
+                 TextColumn::make('payment_type') 
+                ->searchable()
+                ->sortable()->searchable()
+                ->sortable(),
+                 TextColumn::make('currency') 
+                ->searchable()
+                ->sortable()->searchable()
+                ->sortable(),
+                //  ->copyable()
+                //  ->copyMessage('payment')
+                //  ->copyMessageDuration(1500),
 
                 TextColumn::make('trans_status') 
                 ->label('Transaction Status')

@@ -32,7 +32,7 @@ class ViewNewsRecipient extends ViewRecord
             return false;
         }
            }),
-          CommentsAction::make(),
+        //   CommentsAction::make(),
         ];
     }
 
@@ -50,7 +50,7 @@ class ViewNewsRecipient extends ViewRecord
                 TextEntry::make('news.content')->html()->label('News Content')
                 ->columnSpan(2)
             ]),
-                CommentsEntry::make('filament_comments')
+                // CommentsEntry::make('filament_comments')
 
             ])->columns(1);
 

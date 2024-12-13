@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EmailController;
+use Illuminate\Support\Facades\Log;
 use Unicodeveloper\Paystack\Facades\Paystack;
 /*
 |--------------------------------------------------------------------------
@@ -36,12 +37,15 @@ Route::get('/payment/callback', function () {
     $paymentDetails = Paystack::getPaymentData();
     if($paymentDetails['status'] && $paymentDetails['data']['status'] === 'success') {
         $userId = $paymentDetails['data']['metadata']['user_id'];
+       // dd($paymentDetails);
         Payment::create([
             'user_id' => $userId,
-            'amount' => $paymentDetails['data']['amount'] * 100,
+            'amount' => $paymentDetails['data']['amount'],
+            'currency' => $paymentDetails['data']['currency'], 
             'description' => $paymentDetails['data']['metadata']['description'],
             'trans_reference' => $paymentDetails['data']['reference'],
             'trans_status' => $paymentDetails['data']['status'],
+         'payment_type' => $paymentDetails['data']['channel'],
             'metadata' => json_encode($paymentDetails['data']['metadata']),
             'created_at' => now(),
         ]);
@@ -53,6 +57,8 @@ Route::get('/payment/callback', function () {
     return redirect()->route('filament.users.pages.dashboard')
         ->withError('Payment failed!');
 });
+
+
 
 
 Route::get('pdf/{payment}', PdfController::class)->name('pdf');

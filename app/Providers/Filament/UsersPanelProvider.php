@@ -42,7 +42,7 @@ class UsersPanelProvider extends PanelProvider
 
             ->login()
             ->passwordReset()
-            //  ->emailVerification()
+              ->emailVerification()
             ->colors([
                 'primary' => Color::Green,
             ])  ->favicon(asset('assets/images/Aliveng.png'))

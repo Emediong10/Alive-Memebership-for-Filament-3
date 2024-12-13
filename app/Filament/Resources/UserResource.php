@@ -17,6 +17,9 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
 use RelationManagers\SkillsRelationManager;
+use Filament\Tables\Filters\SelectFilter;
+// use Filament\Tables\Filters\TextFilter;
+use Filament\Tables\Filters\Filter;
 use App\Filament\Resources\UserResource\Pages;
 use RelationManagers\AreaInterestsRelationManager;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -86,9 +89,11 @@ class UserResource extends Resource
                 // TextColumn::make('skills')->searchable(),
                 
                 ])
-            ->filters([
-                //
-            ])
+               ->filters([
+                       //
+                    ])
+                
+           
             ->actions([
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),

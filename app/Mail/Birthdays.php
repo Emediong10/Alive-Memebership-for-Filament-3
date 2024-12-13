@@ -16,24 +16,37 @@ class Birthdays extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public $user;
+
+    public function __construct($user)
     {
-        //
+        $this->user = $user;
+    }
+
+    public function build()
+    {
+        return $this->subject('Happy Birthday!')
+                    ->view('mails.birthdays')
+                    ->with([
+                        'name' => $this->user->name,
+                        'email' => $this->user->email,
+                        'dob' => $this->user->date_of_birth,
+                    ]);
     }
 
     /**
      * Get the message envelope.
      */
-    public function envelope(): Envelope
-    {
-        return new Envelope(
-            from: new Address('basseyEmediong@gmail.com'),
-            replyTo: [
-                new Address('basseyemediong20@gmail.com.com' ),
-            ],
-            subject: 'Happy birthday to you',
-);
-    }
+//     public function envelope(): Envelope
+//     {
+//         return new Envelope(
+//             from: new Address('basseyEmediong@gmail.com'),
+//             replyTo: [
+//                 new Address('basseyemediong20@gmail.com.com' ),
+//             ],
+//             subject: 'Happy birthday to you',
+// );
+//     }
 
     /**
      * Get the message content definition.
@@ -41,7 +54,7 @@ class Birthdays extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'mails.birthdays', // Use the correct email template.
         );
     }
 

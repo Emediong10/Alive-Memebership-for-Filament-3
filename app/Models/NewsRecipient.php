@@ -19,6 +19,16 @@ class NewsRecipient extends Model
         return $this->belongsTo(User::class,'user_id');
     }
 
+    public function replies()
+    {
+        return $this->hasMany(CommentReply::class);
+    }
+
+    public function comment()
+    {
+        return $this->belongsTo(\Parallax\FilamentComments\Models\FilamentComment::class);
+    }
+
     public function news()
     {
         return $this->belongsTo(News::class,'news_id');

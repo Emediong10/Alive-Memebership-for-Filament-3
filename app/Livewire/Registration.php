@@ -2,12 +2,13 @@
 
 namespace App\Livewire;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Chapter;
 use Livewire\Component;
 use App\Models\Application;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class Registration extends Component
 
@@ -30,7 +31,7 @@ class Registration extends Component
 
     public function updatedMonthlysupport($value)
     {
-       // dd($value);
+     
     }
 
 
@@ -40,7 +41,12 @@ class Registration extends Component
             'firstname' => 'required',
             'middlename' => 'required',
             'lastname' => 'required',
-            'dob' => 'required',
+            'dob' => ['required', function ($attribute, $value, $fail) {
+            $age = Carbon::parse($value)->age;
+            if ($age < 20) {
+                $fail('You must be at least 20 years old to proceed.');
+            }
+        }],
             'phone'=>'required|unique:users,phone',
             'gender' => 'required',
             'chapter' => 'required',

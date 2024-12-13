@@ -59,7 +59,6 @@ class EventApplicationResource extends Resource
                 TextColumn::make('venue')->label('Venue')->searchable(),
                 TextColumn::make('start_date')->label('Start Date')->sortable()->searchable(),
                 TextColumn::make('end_date')->label('End Date')->sortable()->searchable(),
-               // ToggleColumn::make('confirm_attendance')->label('Confirm your attendance after the event??'),
                ImageColumn::make('event_flyer'),
                 TextColumn::make('event_fees')->label('Fees')->getStateUsing(function ($record) {
                     return $record->event_fees.' '.$record->event_fees_currency;
@@ -99,7 +98,7 @@ class EventApplicationResource extends Resource
                         default => null,
                     };
                 })
-            
+
                ->sortable(),
             ])
             ->filters([
@@ -137,7 +136,7 @@ class EventApplicationResource extends Resource
                         ['event_id', $record->id],
                         ['user_id', auth()->user()->id],
                     ])->first();
-            
+
                     if ($eventApplicant && $eventApplicant->approval_status === 2) {
                         $declineReason = $eventApplicant->decline_reason ?? 'No reason provided';
                         Notification::make()
@@ -158,7 +157,7 @@ class EventApplicationResource extends Resource
                         ['event_id', $record->id],
                         ['user_id', auth()->user()->id],
                     ])->first();
-            
+
                     return $eventApplicant && $eventApplicant->approval_status === 2;
                 }),
 
@@ -206,8 +205,8 @@ class EventApplicationResource extends Resource
                     return $eventApplicant && $eventApplicant->approval_status === 2;
                 }),
 
-            
-            
+
+
                 Action::make('Payment')
                 ->icon('heroicon-o-credit-card')
                 ->action(function ($record, $data) {
@@ -215,7 +214,7 @@ class EventApplicationResource extends Resource
                         ['event_id', $record->id],
                         ['user_id', auth()->user()->id],
                     ])->first();
-            
+
                     if ($eventApplicant) {
                         if ($data['payment_choice'] === 'existing') {
                             $eventApplicant->update([
@@ -227,7 +226,7 @@ class EventApplicationResource extends Resource
                             try {
                                 $paystack = new \Unicodeveloper\Paystack\Paystack();
                                 $user = auth()->user();
-            
+
                                 $transactionData = [
                                     'amount' => $record->event_fees * 100, // Amount in kobo (multiply by 100)
                                     'email' => $user->email,
@@ -236,9 +235,9 @@ class EventApplicationResource extends Resource
                                         'description' => 'Payment for Event #' . $record->id,
                                     ],
                                 ];
-            
+
                                 $response = $paystack->getAuthorizationUrl($transactionData)->redirectNow();
-            
+
                                 return $response;
                             } catch (\Exception $e) {
                                 Notification::make()
@@ -283,20 +282,20 @@ class EventApplicationResource extends Resource
                         ['event_id', $record->id],
                         ['user_id', $applicant_id],
                     ])->first();
-            
+
                     // Check if event_fees is null or zero
                     if (is_null($record->event_fees) || $record->event_fees == 0) {
                         return false; // Disable button if event_fees is null or zero
                     }
-            
+
                     // Check if the application status is approved
                     if ($eventApplicant && $eventApplicant->approval_status === 1) {
                         return false; // Disable button if the application is approved
                     }
-            
+
                     return true; // Otherwise, show payment button
                 }),
-            
+
 
             ])
         //
@@ -312,7 +311,7 @@ class EventApplicationResource extends Resource
         try {
             $paystack = new \Unicodeveloper\Paystack\Paystack();
             $user = auth()->user();
-    
+
             $transactionData = [
                 'amount' => $data['amount'] * 100, // Amount in kobo
                 'email' => $user->email,
@@ -321,18 +320,18 @@ class EventApplicationResource extends Resource
                     'description' => $data['description'],
                 ],
             ];
-    
+
             // Generate authorization URL
             $response = $paystack->getAuthorizationUrl($transactionData)->redirectNow();
-    
+
             return $response;
         } catch (\Exception $e) {
             // Handle API errors or exceptions
             return redirect()->back()->with('error', 'Failed to initiate payment: ' . $e->getMessage());
         }
     }
-    
-    
+
+
 
     public static function getPages(): array
     {
