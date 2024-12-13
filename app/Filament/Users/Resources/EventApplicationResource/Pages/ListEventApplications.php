@@ -28,7 +28,7 @@ class ListEventApplications extends ListRecords
             }),
             //  Actions\DeleteAction::make(),
         ];
-    }
+    } 
 
     protected function getTableQuery(): ?Builder
     {
