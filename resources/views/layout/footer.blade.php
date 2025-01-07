@@ -1,90 +1,79 @@
-<div class="container">
 
-    <!-- Footer Widgets
-    ============================================= -->
-    <div class="footer-widgets-wrap pb-4">
+<div>
+    <div>
 
-        <div class="row">
+        <footer id="footer" class="dark" style="background-color: #215312">
 
-<div class="col-md-3 col-lg-12">
-    <div class="widget clearfix" style="margin-bottom: -20px;">
+            <!-- Copyrights
+   ============================================= -->
+            <div id="copyrights">
+                <div class="container">
 
-    <div class="row">
+                    <div class="row col-mb-30">
+                        <div class="text-center col-md-6 text-md-start">
+                            Email us: <i class="icon-envelope2"></i><a href="mailto:info@alivenigeria.org"
+                                target="blank"> info@alivenigeria.org</a> <br> Contact us:<span class="middot">&middot;</span>
+                            <i class="icon-headphones"></i> +2348126922488 <span class="middot">&middot;</span>
+                           
+                        </div>
 
-        <div class="col-6 col-md-12 col-lg-6 clearfix bottommargin-sm">
-                <a href="https://web.facebook.com/alivenigeria"class="social-icon si-dark si-colored si-facebook mb-0" style="margin-right: 10px;"  target="blank">
-                <i class="icon-facebook"></i>
-                            <i class="icon-facebook"></i>
-                </a>
-            <a href="https://web.facebook.com/alivenigeria"  target="blank"><small style="display: block; margin-top: 3px;"><strong>Follow us</strong><br>on Facebook</small></a>
-                </div>
+                        <div class="text-center col-md-6 text-md-end">
+                            <div class="d-flex justify-content-center justify-content-md-end">
+                                <a href="https://web.facebook.com/alivenigeria" target="blank"
+                                    class="social-icon si-small si-borderless si-facebook">
+                                    <i class="icon-facebook"></i>
+                                    <i class="icon-facebook"></i>
+                                    <i class="icon-facebook"></i>
+                                </a>
 
-<div class="col-6 col-md-12 col-lg-6 clearfix bottommargin-sm">
-                    <a href="https://twitter.com/i/flow/login?redirect_after_login=%2FALIVENIGERIA1" class="social-icon si-dark si-colored si-twitter mb-0" style="margin-right: 10px;"  target="blank">
-                    <i class="icon-twitter"></i>
-                                <i class="icon-twitter"></i>
-                    </a>
-                <a href="https://twitter.com/i/flow/login?redirect_after_login=%2FALIVENIGERIA1"  target="blank"><small style="display: block; margin-top: 3px;"><strong>Follow us</strong><br>on Twitter</small></a>
+                                <a href="twitter.com/i/flow/login?redirect_after_login=%2FALIVENIGERIA1" target="blank"
+                                    class="social-icon si-small si-borderless si-twitter">
+                                    <i class="icon-twitter"></i>
+                                    <i class="icon-twitter"></i>
+                                    <i class="icon-twitter"></i>
+                                </a>
+
+                                <a href="https://www.youtube.com/user/AlivenigeriaSDA" target="blank"
+                                    class="social-icon si-small si-borderless si-gplus">
+                                    <i class="icon-youtube"></i>
+                                    <i class="icon-youtube"></i>
+                                    <i class="icon-youtube"></i>
+                                </a>
+
+                                <a href="https://www.instagram.com/alive.nigeria/" target="blank"
+                                    class="social-icon si-small si-borderless si-pinterest">
+                                    <i class="icon-instagram"></i>
+                                    <i class="icon-instagram"></i>
+                                    <i class="icon-instagram"></i>
+                                </a>
+
+                                <a href="mailto:info@alivenigeria.org" target="blank"
+                                    class="social-icon si-small si-borderless si-yahoo">
+                                    <i class="icon-yahoo"></i>
+                                    <i class="icon-yahoo"></i>
+                                    <i class="icon-yahoo"></i>
+                                </a>
+
+                            </div>
+
+                            <div class="clear"></div>
+
+                            Copyrights &copy; 2024 All Rights Reserved by ALIVE-Nigeria<br>
+                            <div class="copyright-links"><a href="/faq">FAQ</a> / <a href="#">Privacy
+                                    Policy</a></div>
+
+
+                        </div>
+
                     </div>
 
-                <div class="col-6 col-md-12 col-lg-6 clearfix bottommargin-sm">
-                    <a href="https://www.instagram.com/alive.nigeria/" class="social-icon si-dark si-colored si-instagram mb-0" style="margin-right: 10px;"  target="blank">
-                    <i class="icon-instagram"></i>
-                    <i class="icon-instagram"></i>
-                    </a>
-                <a href="https://www.instagram.com/alive.nigeria/"  target="blank"><small style="display: block; margin-top: 3px;"><strong>Follow us</strong><br>on Instagram</small></a>
                 </div>
+            </div><!-- #copyrights end -->
+        </footer><!-- #footer end -->
 
-                    <div class="col-6 col-md-12 col-lg-6 clearfix bottommargin-sm">
-                    <a href="https://www.youtube.com/user/AlivenigeriaSDA" class="social-icon si-dark si-colored si-youtube mb-0" style="margin-right: 10px;"  target="blank">
-                    <i class="icon-youtube"></i>
-                                <i class="icon-youtube"></i>
-                    </a>
-                <a href="https://www.youtube.com/user/AlivenigeriaSDA"  target="blank"><small style="display: block; margin-top: 3px;"><strong>Follow and Subscribe to us</strong><br>on Youtube</small></a>
+    </div><!-- #wrapper end -->
+    <div id="gotoTop" class="icon-line-arrow-up"></div>
 
-                </div>
-
-            <div class="col-12">
-                <div class="footer-big-contacts">
-                    <span>Call Us:</span>
-                    +2348126922488
-
-            <div class="col-12">
-                <div class="footer-big-contacts">
-                    <span>Send an Email:</span>
-                    info@alivenigeria.org
-            </div>
-                </div>
-            </div>
-
-
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-
+    <!-- Go To Top
+ ============================================= -->
 </div>
-</div><!-- .footer-widgets-wrap end -->
-</div>
-
-<!-- Copyrights
-============================================= -->
-<div id="copyrights">
-    <div class="container">
-
-        <div class="row justify-content-between align-items-center">
-            <div class="col-md-6">
-                Copyrights &copy; 2024 All Rights Reserved by Alive-Nigeria.
-            </div>
-
-            <div class="col-md-6 d-md-flex flex-md-column align-items-md-end mt-4 mt-md-0">
-                <div class="copyrights-menu copyright-links">
-                    <a href="https://alivenigeria.org/blogs">Blog</a>/<a href="https://alivenigeria.org/chapters">Chapters</a>/<a href="https://alivenigeria.org/faqs">FAQs</a>/<a href="#">Contact</a>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div><!-- #copyrights end -->

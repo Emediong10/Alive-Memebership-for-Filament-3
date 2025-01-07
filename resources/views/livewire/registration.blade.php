@@ -61,7 +61,7 @@
                     </div>
                     <div class="form-group">
                         <label for="description">Phone:</label>
-                        <input type="text" wire:model="phone" class="form-control" />
+                        <input type="text" wire:model="phone" class="form-control" placeholder="08012345678" />
                         @error('phone') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
 
@@ -123,7 +123,7 @@
                 <div class="row">
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group">
-                            <p>I personally do active outreach monthly (not just church work):</p>
+                            <p>I engage in personal outreach regularly</p>
                               <label class="radio-inline">
                                 <input type="radio" class="" wire:model="monthly_outreach" value="yes">Yes
                               </label>
@@ -143,7 +143,7 @@
                               @error('professional') <span class="error text-danger">{{ $message }}</span> @enderror
                         </div>
                         <div class="form-group">
-                            <label> I desire to support ALIVE-Nigeria ministry with at least monthly</label>
+                            <label> I desire to support ALIVE-Nigeria with my monthly financial commitment</label>
                             <select class="form-control form-select text-success border-success" wire:model="will_support">
                                 <option value="">Select Option</option>
                                 <option value="i don't want to support">I don't want to support ALIVE-Nigeria</option>
@@ -156,7 +156,7 @@
                     </div>
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group">
-                            <p>I strive to live out our high Christian standard as taught by the Bible and SOP:</p>
+                            <p>I aim to live out our high Christian standard as taught by our Savior in the Bible and also revealed in the SOP</p>
                               <label class="radio-inline">
                                 <input type="radio" class=""   wire:model="christian_standard" value="yes">Yes
                               </label>
@@ -246,17 +246,6 @@
     </div>
 
     <div class="setup-content {{ $currentStep != 4 ? 'displayNone' : '' }}" id="step_4">
-    @if($will_support == '1k-5k' && $monthly_amount <= '1000')
-    <div class="text-center mt-5 mb-5">
-        <a href="{{ url('registration') }}" class="btn btn-success btn-lg"> Go back</a>
-   </div>
-    @else
-    <div class="text-center mt-5 mb-5">
-           <a href="{{ url('users/login') }}" class="btn btn-success btn-lg">Proceed To Sign-in</a>
-      </div>
-
-    @endif
-
 
 
     </div>
@@ -264,4 +253,5 @@
 
 
 
+</div>
 </div>

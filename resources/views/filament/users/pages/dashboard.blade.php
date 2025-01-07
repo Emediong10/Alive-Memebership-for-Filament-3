@@ -12,7 +12,9 @@
                 Welcome: {{ $user->name }}
             </strong>
         </div>
-        {{-- {{ dd($licence) }} --}}
+
+
+
         @if ($licence)
             <div style="font-size:22px; font-weight:bold">
                 {{-- <h5>{{ $comment }}</h5> --}}
@@ -35,13 +37,24 @@
             </div>
         @else
 
+        @if ($showMessage)
+        <div class="rolling-message p-4 rounded flex justify-between items-center" style="background-color:#023020; color: white;">
+            <marquee behavior="scroll" direction="left">
+                "Dear {{ $user->name }}, 🚀 Thank you for your continued support! This is a kind reminder of your monthly commitment to ALIVE-Nigeria. Your contributions make a difference!"
+            </marquee>
+
+            <button onclick="window.location.href='{{ url('users/payments') }}'" style="background-color: #3b82f6; color: white; padding: 8px 16px; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; margin-left: 16px;">
+                Go to Payment page
+            </button>
+        </div>
+        @endif
+
         <div class="container-fluid pb-video-container">
             <div class="col-md-10 col-md-offset-1">
                 <h3 class="text-center">Sample Video Gallery</h3>
                 <div class="row pb-row">
 
                     <div class="col-md-3 pb-video">
-                        {{-- <iframe class="pb-video-frame" width="100%" height="230" src="https://www.youtube.com/live/cjQdhNTYf1I?si=GwseicGI_WVjiZNP" frameborder="3" allowfullscreen></iframe> --}}
 
                         <iframe class="pb-video-frame" width="100%" height="230" src="https://www.youtube.com/embed/R5iAy7FQuNo?si=HTIUZCfhljMtuIg1" frameborder="50" allowfullscreen></iframe>
 
@@ -51,7 +64,7 @@
             </div>
         </div>
 
-
+        {{-- this is for the rolling message for payment reminder --}}
 
 
 
@@ -123,6 +136,17 @@
     .pb-row {
         margin-bottom: 10px;
     }
+
+    .rolling-message {
+        margin: 10px 0;
+        /* bg-color:Green; */
+        font-weight: bold;
+        font-size: 1.2rem;
+        padding: 10px;
+        border: 1px solid #3b82f6;
+        border-radius: 5px;
+    }
 </style>
+
 
 </x-filament-panels::page>

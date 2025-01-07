@@ -76,7 +76,10 @@ class MyDetails extends Page implements HasInfolists
               ->color('success'),
               Textentry::make('email')
               ->color('success'),
+
               Textentry::make('chapter.name')
+              ->color('success'),
+              Textentry::make('member_type.type')
               ->color('success'),
 
                 Textentry::make('gender')

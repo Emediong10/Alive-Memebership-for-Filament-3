@@ -41,7 +41,7 @@ Route::get('/payment/callback', function () {
         Payment::create([
             'user_id' => $userId,
             'amount' => $paymentDetails['data']['amount'],
-            'currency' => $paymentDetails['data']['currency'], 
+            'currency' => $paymentDetails['data']['currency'],
             'description' => $paymentDetails['data']['metadata']['description'],
             'trans_reference' => $paymentDetails['data']['reference'],
             'trans_status' => $paymentDetails['data']['status'],
@@ -58,6 +58,17 @@ Route::get('/payment/callback', function () {
         ->withError('Payment failed!');
 });
 
+Route::get('/volunteer-success', function () {
+    return view('successful-registration.volunteer');
+})->name('volunteer-success');
+
+Route::get('/outreach-success', function () {
+    return view('successful-registration.outreach');
+})->name('outreach-success');
+
+Route::get('/financial-success', function () {
+    return view('successful-registration.financial');
+})->name('financial-success');
 
 
 

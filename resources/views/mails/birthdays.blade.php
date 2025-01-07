@@ -79,9 +79,7 @@
 <body>
     <div class="container">
         <div class="content">
-            {{-- <div id="logo">
-                <img src="{{ url('assets/images/Aliveng.png') }}" alt="Alive Logo">
-            </div> --}}
+          
             <div class="header">
                 <h1>🎉 Happy Birthday! 🎉</h1>
             </div>
@@ -89,18 +87,22 @@
             <div class="message">
                 <h2>Dear {{ $user->name }},</h2>
                 <p>
-                    Wishing you a fantastic birthday filled with love, laughter, and joy.</p>
-
-                  <p>  May your life be enriched with God's blessings, grace, and abundant happiness.
+                    We are excited to celebrate God's faithfulness towards you.
                 </p>
-                <p><strong>“The Lord bless you and keep you; the Lord make His face shine upon you and be gracious to you.” – Numbers 6:24-25</strong></p>
+                  <p> As you navigate life's uncertainties, remember that our hope is anchored in God's unwavering love and promises.
+                </p>
+                <p><strong>In Philippians 4:6-7, the Bible reminds us: "Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus."
+                </strong></p>
                 <p>
-                    Have an amazing day filled with wonderful memories! We are so glad to have you as part of the ALIVE-Nigeria family.
+                    This week, take a moment to reflect on the areas of your life where you're feeling anxious or uncertain. Bring those concerns before God in prayer, and ask Him to fill you with His peace.
+
                 </p>
+                <bold>We are glad you're part of ALIVE family and pray that your life will be transformed by God's love.
+                </bold>
             </div>
             <!-- Footer -->
             <div class="footer">
-                <p>With warm regards,</p>
+                <bold>With warm regards,</bold>
                 <p><strong>ALIVE-Nigeria</strong></p>
                 <p><a href="https://www.alivenigeria.org">Visit our website</a></p>
             </div>

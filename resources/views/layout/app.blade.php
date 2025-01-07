@@ -7,6 +7,9 @@
 
 	<!-- Stylesheets
 	============================================= -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Source+Sans+Pro" rel="stylesheet">
+
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700&display=swap" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="{{ url('new/css/bootstrap.css') }}" type="text/css" />
 	<link rel="stylesheet" href="{{ url('new/style.css') }}" type="text/css" />
@@ -35,6 +38,12 @@
 	============================================= -->
 	<title>ALIVE Nigeria</title>
 
+    <style>
+
+		.mfp-close { display: none !important; }
+
+	</style>
+
 </head>
 
 <body class="stretched">
@@ -42,7 +51,7 @@
 	<!-- Header
 		============================================= -->
 		{{-- @include('layouts.nav') --}}
-		<br><br><br>
+	
 
         @yield('content')
 
@@ -50,13 +59,14 @@
 
 		<!-- Footer
 		============================================= -->
-		<footer id="footer" class="dark" style="background-color: #0d2706">
+
 
             {{-- @include('layout.footer') --}}
 
-		</footer><!-- #footer end -->
 
-	</div><!-- #wrapper end -->
+        <!-- #footer end -->
+
+
 
 	<!-- Go To Top
 	============================================= -->
@@ -67,15 +77,30 @@
 	<script src="{{ url('new/js/jquery.js') }}"></script>
 	<script src="{{ url('new/js/plugins.min.js') }}"></script>
 
+
 	<!-- Footer Scripts
 	============================================= -->
 	<script src="{{ url('new/js/functions.js') }}"></script>
 
+
 	<!-- ADD-ONS JS FILES -->
 	<script>
+		jQuery(document).ready( function(){
 
+			var element = $(".custom-file");
 
+			element.find('input[type="file"]').change(function(e){
+				var fileName = e.target.files[0].name;
+				element.find('.custom-file-label').html(fileName);
+			});
 
+			$('#template-contactform').on( 'formSubmitSuccess', function(){
+				setTimeout(function(){
+ 					$('#block-modal-request').magnificPopup('close');
+  				}, 500);
+			});
+
+		});
 	</script>
 
 </body>

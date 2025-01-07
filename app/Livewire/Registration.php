@@ -164,8 +164,8 @@ class Registration extends Component
         ) {
             $user->assignRole('financial');
             $user->member_type_id = 1;
-            $this->successMsg = "Thank you for registering as a Financial Member with ALIVE-Nigeria for 2025. Let’s continually raise the banner of Christ higher. Maranatha!";
             $user->update();
+            return redirect()->route('financial-success');
         } elseif (
             $answers['monthly_outreach'] === "yes" &&
             $answers['professional'] === "yes" &&
@@ -180,20 +180,22 @@ class Registration extends Component
         ) {
             $user->assignRole('outreach');
             $user->member_type_id = 2;
-            $this->successMsg = "Thank you for registering as an Outreach Member with ALIVE-Nigeria for 2025. Let’s continually raise the banner of Christ higher. Maranatha!";
+            // $this->successMsg = "Thank you for registering as an Outreach Member with ALIVE-Nigeria for 2025. Let’s continually raise the banner of Christ higher. Maranatha!";
             $user->update();
+            return redirect()->route('outreach-success');
         }
          else {
             $user->assignRole('volunteer');
             $user->member_type_id = 3;
-            $this->successMsg = "Thank you for registering as a Volunteer Member with ALIVE-Nigeria for 2025. Let’s continually raise the banner of Christ higher. Maranatha!";
+            // $this->successMsg = "Thank you for registering as a Volunteer Member with ALIVE-Nigeria for 2025. Let’s continually raise the banner of Christ higher. Maranatha!";
             $user->update();
+            return redirect()->route('volunteer-success');
         }
 
 
        // dd($answers);
 
-        $this->currentStep = 4;
+     $this->currentStep = 4;
         // $this->reset();
 
     }

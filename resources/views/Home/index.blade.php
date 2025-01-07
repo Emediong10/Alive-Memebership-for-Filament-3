@@ -1,132 +1,121 @@
 @extends('layout.app')
 @section('content')
-<!-- Slider
-		============================================= -->
-        <section id="slider" class="slider-element min-vh-100 include-header" style="background: url('new/demos/crowdfunding/images/watercolour.png') no-repeat center bottom / cover;">
-            <div class="overlay">
-		<div class="slider-inner">
+@include('Home.pop-up')
+<!-- Slider Section -->
+<section id="slider" class="slider-element min-vh-100 include-header" style="background: url('new/demos/crowdfunding/images/watercolour.png') no-repeat center bottom / cover;">
+    <!-- Overlay -->
+    <div class="overlay"></div>
 
-			<div class="vertical-middle">
-				<div class="container py-5">
-					<div class="row">
-						<div class="col-lg-6 col-md-8">
-							<div class="slider-title">
-								<h1 class="fw-semibold center">ALIVE-NIGERIA MEMBERSHIP PORTAL</h1>
-								<div><strong>Our mission is to prepare Africa for the imminent return of Jesus Christ through biblical spiritual training and evangelistic efforts. It is our goal to challenge African Seventh-day Adventist young adults to live a lifestyle of authentic biblical excellence, instill a missionary volunteer spirit in every African Seventh-day Adventist young adult, mobilize and support young adult missionary movements across Africa, create a meaningful impact in neglected areas, and finally change the continent of Africa by ushering in the imminent return of Jesus Christ. </strong></div>
-							</div>
-                            <br>
-							<a href="{{ route('registration') }}" class="button button-success button-large fw-semibold button-rounded ls0 nott ms-0">Register Here</a>
-<a href="{{ url('users/login') }}" target="blank" class="button button-success button-large fw-semibold button-rounded ls0 nott ms-0">Sign In</a><br>
-<a href="{{ route('membership_standards') }}" target="blank" class="button button-success button-large fw-semibold button-rounded ls0 nott ms-0">Read Membership Standards here</a>
-
-						</div>
-		{{-- <img src="assets/images/welcome2.png" alt="" class="slider-img parallax;"  data-400="margin-top:40px;adeInRight" style="border-radius: 15px; padding-left:60px; width: 500px;"> --}}
-        <div class="col-md-4 center">
-			<img data-animate="fadeInLeft" src="assets/images/welcome2.png" alt="Welcome">
-		</div>
-					</div>
-				</div>
-			</div>
-        </div>
-		</div>
-	</section><!-- #Slider End -->
-		<!-- Content
-		============================================= -->
-        <section id="slider" class="slider-element min-vh-100 include-header" style="background: url('new/demos/crowdfunding/images/watercolour.png') no-repeat center bottom / cover;">
-            <div class="overlay">
-			<div class="content-wrap p-0">
-				<div class="fancy-title title-border title-center">
-						<h1>I WILL GO</h1>
+    <!-- Slider Inner Content -->
+    <div class="slider-inner">
+        <div class="container py-5">
+            <div class="row">
+                <!-- Content Column -->
+                <div class="col-lg-6 col-md-8 position-relative" style="z-index: 20;">
+                    <div class="slider-title">
+                        <h1 class="fw-semibold center">ALIVE-NIGERIA MEMBERSHIP PORTAL</h1>
+                        <div><strong>Our mission is to prepare Africa for the imminent return of Jesus Christ through biblical spiritual training and evangelistic efforts. It is our goal to challenge African Seventh-day Adventist young adults to live a lifestyle of authentic biblical excellence, instill a missionary volunteer spirit in every African Seventh-day Adventist young adult, mobilize and support young adult missionary movements across Africa, create a meaningful impact in neglected areas, and finally change the continent of Africa by ushering in the imminent return of Jesus Christ. </strong></div>
                     </div>
-                        <div class="center">
-                            <strong>Join us today and lets get the good news of the gospel to places where no one wants to go!</strong>
-						</div>
-<br>
-					<div class="row justify-content-center col-mb-50 mb-5">
-						<div class="col-md-6 col-lg-4">
-
-							<div class="fslider"  data-direction="horizontal" data-pagi="false" data-arrows="false">
-								<div class="flexslider">
-									<div class="slider-wrap">
-										<div class="slide"><img src="{{ asset ('assets/images/Alivepic17.jpg')}}" alt="Slider 1"></div>
-										<div class="slide"><img src="{{ asset ('assets/images/Alivepic8.jpg')}}" alt="Slider 2"></div>
-										<div class="slide"><img src="{{ asset ('assets/images/Alivepic19.jpg')}}" alt="Slider 3"></div>
-										<div class="slide"><img src="{{ asset ('assets/images/Alivepic14.jpg')}}" alt="Slider 4"></div>
-										<div class="slide"><img src="{{ asset ('assets/images/Alivepic4.jpg')}}" alt="Slider 5"></div>
-										<div class="slide"><img src="{{ asset ('assets/images/Alivepic13.jpg')}}" alt="Slider 6"></div>
-
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 col-lg-4">
-						<div class="fslider"  data-direction="horizontal" data-pagi="false" data-arrows="false">
-								<div class="flexslider">
-									<div class="slider-wrap">
-										<div class="slide"><img src="{{ asset ('assets/images/Alivepic1.jpg')}}" alt="Slider 1"></div>
-										<div class="slide"><img src="{{ asset ('assets/images/Alivepic2.jpg')}}" alt="Slider 2"></div>
-										<div class="slide"><img src="{{ asset ('assets/images/Alivepic7.jpg')}}" alt="Slider 3"></div>
-										<div class="slide"><img src="{{ asset ('assets/images/Alivepic5.jpg')}}" alt="Slider 4"></div>
-										<div class="slide"><img src="{{ asset ('assets/images/Alivepic15.jpg')}}" alt="Slider 5"></div>
-										<div class="slide"><img src="{{ asset ('assets/images/Alivepic13.jpg')}}" alt="Slider 6"></div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-6 col-lg-4">
-							<div class="fslider"  data-direction="horizontal" data-pagi="false" data-arrows="false">
-								<div class="flexslider">
-									<div class="slider-wrap">
-										<div class="slide"><img src="{{ asset ('assets/images/Alivepic11.jpg')}}" alt="Slider 1"></div>
-										<div class="slide"><img src="{{ asset ('assets/images/Alivepic.jpg')}}" alt="Slider 2"></div>
-										<div class="slide"><img src="{{ asset ('assets/images/Alivepic18.jpg')}}" alt="Slider 3"></div>
-										<div class="slide"><img src="{{ asset ('assets/images/Alivepic10.jpg')}}" alt="Slider 4"></div>
-										<div class="slide"><img src="{{ asset ('assets/images/Alivepic21.jpg')}}" alt="Slider 5"></div>
-										<div class="slide"><img src="{{ asset ('assets/images/Alivepic6.jpg')}}" alt="Slider 6"></div>
-									</div>
-								</div>
-							</div>
-						</div>
-                        <div class="center">
-
-
-
-
-                            <a href="{{ str_starts_with('something.alivenigeria.org', 'http') ? 'something.alivenigeria.org' : 'https://something.alivenigeria.org' }}" class="button button-success button-large fw-semibold button-rounded ls0 nott ms-0">Return to Home</a>
-
-                        </div>
-					</div>
-
+                    <br>
+                    <!-- Buttons -->
+                    <div>
+                        <a href="{{ route('registration') }}" class="button button-success button-large fw-semibold button-rounded ls0 nott ms-0">Register Here</a>
+                        <a href="{{ url('users/login') }}" target="_blank" class="button button-success button-large fw-semibold button-rounded ls0 nott ms-0">Sign In</a>
+                        <br>
+                        <a href="{{ route('membership_standards') }}" target="_blank" class="button button-success button-large fw-semibold button-rounded ls0 nott ms-0">Read Membership Standards here</a>
+                    </div>
                 </div>
-			</div>
 
-		</section>
+                <!-- Image Column -->
+                <div class="col-md-4 center position-relative" style="z-index: 20;">
+                    <img data-animate="fadeInLeft" src="assets/images/welcome2.png" alt="Welcome">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-        <style>
-            .button-success {
-    background-color: #28a745;
-    color: #fff;
-}
+<!-- Additional Content Section -->
+<section id="slider"  class="slider-element min-vh-100 include-header" style="background: url('new/demos/crowdfunding/images/watercolour.png') no-repeat center bottom / cover;">
+    <div class="overlay"></div>
+    <div class="content-wrap p-0 position-relative" style="z-index: 20;">
+        <div class="fancy-title title-border title-center">
+            <h1>I WILL GO</h1>
+        </div>
+        <div class="center">
+            <strong>Join us today and let's get the good news of the gospel to places where no one wants to go!</strong>
+        </div>
+        <br>
+        <!-- Slider Images -->
+        <div class="row justify-content-center col-mb-50 mb-5">
+            <div class="col-md-6 col-lg-4">
+                <div class="fslider" data-direction="horizontal" data-pagi="false" data-arrows="false">
+                    <div class="flexslider">
+                        <div class="slider-wrap">
+                            <div class="slide"><img src="{{ asset('assets/images/Alivepic17.jpg') }}" alt="Slider 1"></div>
+                            <div class="slide"><img src="{{ asset('assets/images/Alivepic8.jpg') }}" alt="Slider 2"></div>
+                            <div class="slide"><img src="{{ asset('assets/images/Alivepic19.jpg') }}" alt="Slider 3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="fslider" data-direction="horizontal" data-pagi="false" data-arrows="false">
+                    <div class="flexslider">
+                        <div class="slider-wrap">
+                            <div class="slide"><img src="{{ asset('assets/images/Alivepic1.jpg') }}" alt="Slider 1"></div>
+                            <div class="slide"><img src="{{ asset('assets/images/Alivepic2.jpg') }}" alt="Slider 2"></div>
+                            <div class="slide"><img src="{{ asset('assets/images/Alivepic7.jpg') }}" alt="Slider 3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="fslider" data-direction="horizontal" data-pagi="false" data-arrows="false">
+                    <div class="flexslider">
+                        <div class="slider-wrap">
+                            <div class="slide"><img src="{{ asset('assets/images/Alivepic11.jpg') }}" alt="Slider 1"></div>
+                            <div class="slide"><img src="{{ asset('assets/images/Alivepic.jpg') }}" alt="Slider 2"></div>
+                            <div class="slide"><img src="{{ asset('assets/images/Alivepic18.jpg') }}" alt="Slider 3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-#slider {
-    position: relative;
-}
+<!-- CSS -->
+<style>
+    .button-success {
+        background-color: #28a745;
+        color: #fff;
+    }
 
-#slider .overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(227, 224, 224, 0.5); /* Black overlay with 50% opacity */
-    z-index: 1;
-}
+    #slider {
+        position: relative; /* Parent container */
+        z-index: 1; /* Keeps content above the default overlay */
+    }
 
-#slider .slider-element {
-    z-index: 2; /* Ensure content appears above overlay */
-}
+    #slider .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(227, 224, 224, 0.5); /* Semi-transparent background */
+        z-index: 5; /* Below content */
+    }
 
-        </style>
+    .slider-inner {
+        position: relative;
+        z-index: 10; /* Content stays above the overlay */
+    }
 
-		<!-- #content end -->
+    .button {
+        position: relative;
+        z-index: 20; /* Buttons above everything else */
+    }
+</style>
+
 @endsection

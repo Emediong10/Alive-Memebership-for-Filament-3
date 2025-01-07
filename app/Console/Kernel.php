@@ -33,7 +33,7 @@ class Kernel extends ConsoleKernel
                     \Log::info("Birthday email sent to {$user->email}");
                 }
             }
-        })->everySecond();  // Use everyMinute() for testing, can change to daily later
+        })->dailyAt('07:00');
     }
 
     /**
